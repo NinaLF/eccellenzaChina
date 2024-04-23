@@ -8,6 +8,6 @@ class Lexicon:
     link = 'https://www.innofact1.com/studio/st/ub5/?sprung=ok&var=1&u='
 
     finish = "点此结束"
-
     
-  
+    feeback_label="您对这项研究有什么意见或反馈吗？感谢分享。（随意）"
+    feeback_title = "您对研究的反馈"

@@ -21,6 +21,12 @@ SESSION_CONFIGS = [
          app_sequence=['FirstBlock', 'Jessi_Instructions',  'Jessi_carbonTax', 'Nina_instructions', 'Nina_carbontask', 'Scales', 'Goodbye' ],
          language = "zh_hans",
          num_demo_participants=10,
+     ),
+     dict(
+         name='testEnd',
+         app_sequence=['FirstBlock', 'Goodbye' ],
+         language = "zh_hans",
+         num_demo_participants=10,
      )
      
 

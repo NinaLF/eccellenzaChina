@@ -1,82 +1,107 @@
-{% block styles %}
-    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
-    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
-{% endblock %}
 
-{% block title %}
-    {{ Lexicon.beliefHuman_title }}
+
+{% block styles %}
+  <!-- Compiled and minified CSS -->
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">  -->
+  <link href="{{ static 'global/css/SamplingPilotgeneral.css'}}" rel="stylesheet">
+  <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
+<body>
+    <h2 id="caption1">{{Lexicon.ccconcern_title}}</h2>
+  
 
+<div style="padding-top:2vh; text-align: center; padding-left:1vw;">
 
-<br>
-<p> {{ Lexicon.beliefHuman_header}}</p>
+    <p> {{Lexicon.beliefHuman_header}}</p>
+    <table  class="radiotable2" style="table-layout: fixed; width: 100%;">
+        <tbody>
+            <tr style="background-color: white;"> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td></tr>
+        {% for field in form %}
+            {% if field.name == 'beliefHuman1' or field.name == 'beliefHuman2' or field.name == 'beliefHuman3' or field.name
+            == 'beliefConseqences1' or field.name == 'beliefConseqences2' or field.name == 'beliefConseqences3' %}
+            {{formfield_errors field.name}}
+            
+            <tr>  
+                <td colspan="10">
+                    <label for={{field.id}} id={{field.id}} name={{field.name}}> </label>
+                </td>
+            </tr>
+            <tr> 
+                <th class="radio-column"  colspan="2" style="text-align: left;">  {{ Lexicon.not_at_all }}</th> 
+                    <th class="radio-column"> </th> 
+                    <th class="radio-column"> </th> 
+                    <th class="radio-column"> </th> 
+                    <th class="radio-column"> </th> 
+                    <th class="radio-column"> </th> 
+                    <th class="radio-column"> </th> 
+                    <th  colspan="2" style="text-align: right;"  class="radio-column"> {{ Lexicon.very_much }} </th> 
+            </tr>
+            <tr style="margin-bottom:400px;">
+                {{ for choice in field }}
+                <td class="radiotablebutton"> {{ choice }} </td>
+                {{ endfor }}
+            </tr>
 
-<table class="radiotable">
-    <tr>
-        <th style="width:23%;"></th>
-        <th class="radio-column" style=" overflow-wrap: break-word;  word-wrap: break-word; text-overflow: ellipsis;" > {{ Lexicon.do_not_believe }} </th>
-        <th class="radio-column" style="word-wrap:break-word; text-overflow: ellipsis;" > {{ Lexicon.completely_disagree  }}</th>
-        <th class="radio-column"> </th class="radio-column">
-        <th class="radio-column"> </th>
-        <th class="radio-column"></th>
-        <th class="radio-column"></th>
-        <th class="radio-column"></th>
-        <th class="radio-column"></th>
-        <th class="radio-column"></th>
-        <th class="radio-column"></th>
-        <th class="radio-column" style=" overflow-wrap: break-word;  word-wrap: break-word; text-overflow: ellipsis;"> {{ Lexicon.completely_agree }} </th>
-    </tr>
-
-    {% for field in form %}
-        {% if field.name == 'beliefHuman1' or field.name == 'beliefHuman2' or field.name == 'beliefHuman3' or field.name == 'beliefConseqences1' or field.name == 'beliefConseqences2' or field.name == 'beliefConseqences3'  %}
-        {{formfield_errors field.name}}
-
-        <tr>
-            <th style="font-weight:normal;"  style="word-wrap:break-word;" id={{field.id}} name={{field.name}}>  </th>
-            {{ for choice in field }}
-            <td   style="width:7%;" > {{ choice }} </td>
-            {{ endfor }}
-        </tr>
-        {% endif %}
-
-    {{ endfor }}
-</table>
-
-<br>
-<br>
-
-
-<br>
-
-<div class="next-btn radiotable">
-    <div style="float: right; padding-top: 2vh;">
-        <button id="nextst"  style=" margin-top: 4vh;" class="otree-btn-next btn btn-primary">{{Lexicon.next}}</button>
- 
-    </div>
+            {{endif}}
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
+
+
+
+
+    <button style="display:block; margin-left:auto; margin-right:1vw;" class="btn" id="nextst"  disabled>{{Lexicon.next}}</button>
+
+</body>
+
+{{ formfield_errors 'range_ccconcern' }}
+
+
 {% endblock %}
 
 
 {% block scripts %}
-<script src="{% static 'global/js/functions.js' %}" defer></script>
 
-<script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"> </script>
 
-    document.addEventListener("DOMContentLoaded", function () {
-    });
 
-    $(document).ready(function () {
-        for (let i = 0; i < js_vars.form_fields.length; i++) {   
+<script> 
+
+triggernext = function() {
+    $("#mynextbtn").trigger("click")
+}
+
+    
+function onSliderChange(event) {
+    if($(event.target).hasClass('untouched')){
+            $(event.target).removeClass('untouched')
+            document.getElementById("nextst").disabled = false;
+            
+        }
+}
+
+$(document).ready(function () {
+    for (let i = 0; i < js_vars.form_fields.length; i++) {   
             prop= js_vars.form_fields[i] + 'Label'
             label = js_vars.form_field_labels[i]
             id = 'id_' + js_vars.form_fields[i]
             $('#' + id).html(label)
         }
+    
+    $('#range_ccconcern').on('input', onSliderChange )
+   
+})
 
 
-    })
+
+
+
+
 
 </script>
+
 {% endblock %}

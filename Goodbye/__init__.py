@@ -44,6 +44,7 @@ def creating_session(subsession:Subsession):
 
 class Player(BasePlayer):
     generalFeedback = models.StringField(max_length=3000, blank=True)
+
     
   # FUNCTIONS
     
@@ -58,13 +59,6 @@ class Player(BasePlayer):
 
 
     
-class Feedback(Page):
-    form_model = 'player'
-    form_fields = ["generalFeedback"]
-    @staticmethod
-    def vars_for_template(player: Player):
-        print("this should be the lixicon")
-        return dict(Lexicon=player.session.GoodbyeLexi)
 
 
 
@@ -82,7 +76,13 @@ class goodbye (Page):
 
         } 
 
-
+class Feedback(Page):
+    form_model = 'player'
+    form_fields = ["generalFeedback"]
+    @staticmethod
+    def vars_for_template(player: Player):
+        print("this should be the lixicon")
+        return dict(Lexicon=player.session.GoodbyeLexi)
 
 
 

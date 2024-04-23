@@ -175,7 +175,12 @@ def cknow9_choices(player):
     ['dk',  Lexicon.dont_know],
 ]
 #endregion
-
+def make_likert_n(n):
+    nchoices = list(range(1, n+1))
+    return models.IntegerField(
+        choices=nchoices,
+        widget=widgets.RadioSelect,
+)
 
 def food_frequencies(player):
     Lexicon = player.session.scalesLexi
@@ -434,15 +439,16 @@ class Player(BasePlayer):
    
 
     ### Belief
-    belief1Happening= make_likert10()
+    belief1Happening= make_likert_n(6)
 
-    beliefHuman1 = make_likert11()
-    beliefHuman2 = make_likert11()
-    beliefHuman3 = make_likert11()
+    beliefHuman1 = make_likert_n(10)
+    beliefHuman2 = make_likert_n(10)
+    beliefHuman3 = make_likert_n(10)
 
-    beliefConseqences1 = make_likert11()
-    beliefConseqences2 = make_likert11()
-    beliefConseqences3 = make_likert11()
+    beliefConseqences1 = make_likert_n(10)
+    beliefConseqences2 = make_likert_n(10)
+    beliefConseqences3 = make_likert_n(10)
+    beliefConseqences4 = make_likert_n(10)
 
     belief1Solutions = make_likert10()
     belief2Solutions = make_likert10()
@@ -491,9 +497,6 @@ class Player(BasePlayer):
     #party_affiliation = models.StringField(choices=get_party_choices(LANGUAGE_CODE, Lexicon) )
     states = models.StringField()
 
-
-
-
     
 
 class Belief(Page):
@@ -510,22 +513,22 @@ class Belief(Page):
         form_field_labels = [Lexicon.belief1HappeningLabel , Lexicon.beliefConsensLabel ]
     )
 
-# class Belief1(Page):
-#     form_model = 'player'
-#     form_fields= [ 'beliefHuman1', 'beliefHuman2', 'beliefHuman3',
-#                   'beliefConseqences1', 'beliefConseqences2', 'beliefConseqences3']
-#     @staticmethod
-#     def vars_for_template(player: Player):
-#         return dict(Lexicon=player.session.scalesLexi)
-#     @staticmethod
-#     def js_vars(player):
-#         Lexicon = player.session.scalesLexi
-#         return dict(
-#         form_fields= [ 'beliefHuman1','beliefHuman2', 'beliefHuman3',
-#                   'beliefConseqences1', 'beliefConseqences2', 'beliefConseqences3'],
-#         form_field_labels = [ Lexicon.beliefHuman1Label, Lexicon.beliefHuman2Label, Lexicon.beliefHuman3Label, 
-#                              Lexicon.beliefConseqences1Label, Lexicon.beliefConseqences2Label, Lexicon.beliefConseqences3Label ]
-#     )
+class Belief1(Page):
+     form_model = 'player'
+     form_fields= [ 'beliefHuman1', 'beliefHuman2', 'beliefHuman3',
+                   'beliefConseqences1', 'beliefConseqences2', 'beliefConseqences3']
+     @staticmethod
+     def vars_for_template(player: Player):
+         return dict(Lexicon=player.session.scalesLexi)
+     @staticmethod
+     def js_vars(player):
+         Lexicon = player.session.scalesLexi
+         return dict(
+         form_fields= [ 'beliefHuman1','beliefHuman2', 'beliefHuman3',
+                   'beliefConseqences1', 'beliefConseqences2', 'beliefConseqences3'],
+         form_field_labels = [ Lexicon.beliefHuman1Label, Lexicon.beliefHuman2Label, Lexicon.beliefHuman3Label, 
+                              Lexicon.beliefConseqences1Label, Lexicon.beliefConseqences2Label, Lexicon.beliefConseqences3Label ]
+     )
 
 class Belief2 (Page):
     form_model = 'player'
@@ -711,7 +714,8 @@ class transition (Page):
     
 
 
-page_sequence = [ transition, Belief, Belief2, CCKnowledge, CCEmotion,
+
+page_sequence = [ transition,Belief1,  Belief, Belief2, CCKnowledge, CCEmotion,
                  BehaviorsFood, BehaviorsFood2, BehaviorsTransport, BehaviorsFlying, 
                  PITrust, IBValues ,
                  policyScales,
