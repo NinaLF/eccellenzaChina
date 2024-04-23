@@ -261,7 +261,7 @@ class Lexicon:
     transitions_a = '非常感谢您迄今为止的回答。如果您在继续学习之前需要短暂休息，那么现在是个好时机。 <br> 单击此页面上的下一个按钮后，我们要求您一次性完成此块'
     # we will need to add a counter and then display that variable in the page, not sure how to integrate it in the lexicon 
     transitions_b = '这是区块号 '
-    transitions_c = '共 4 个区块。 再次感谢您花时间回答所有问题。 <br>一旦你准备好了，请继续。'
+    transitions_c = '共 3 个区块。 再次感谢您花时间回答所有问题。 <br>一旦你准备好了，请继续。'
 
     
     
