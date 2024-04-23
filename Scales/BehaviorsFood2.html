@@ -1,0 +1,103 @@
+
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+
+{% endblock %}
+
+{% block title %}
+{{ Lexicon.behaviors_title}}
+{% endblock %}
+
+{% block content %}
+<br>
+{{ Lexicon.intro_a}}
+<br>
+<br>
+
+<br>
+
+<label>{{ Lexicon.regional_label }}</label>
+<br>
+<table class="radiotable" style="text-align: center;">
+    <tr>
+
+        <th class="radio-column"> {{ Lexicon.regional_less_than }} </th>
+        <th class="radio-column"> {{ Lexicon.regional_quarter }} </th>
+        <th class="radio-column">{{ Lexicon.regional_half }} </th>
+        <th class="radio-column"> {{ Lexicon.regional_3_quarter }} </th>
+        <th class="radio-column"> {{ Lexicon.regional_more_than }} </th>
+    </tr>
+
+    {% for field in form %}
+        {% if field.name == 'footprint_regional'    %}
+        {{formfield_errors field.name}}
+
+        <tr>
+            {{ for choice in field }}
+            <td>{{ choice }}</td>
+            {{ endfor }}
+        </tr>
+    {% endif %}
+
+{{ endfor }}
+</table>
+<br>
+<label>{{ Lexicon.electricity_label }}</label>
+<br>
+<table class="radiotable" style="text-align: center;" >
+    <tr>
+
+        <th class="radio-column"> {{ Lexicon.electricity_D }} </th>
+        <th class="radio-column"> {{ Lexicon.electricity_C }} </th>
+        <th class="radio-column">{{ Lexicon.electricity_B }} </th>
+        <th class="radio-column"> {{ Lexicon.electricity_A }} </th>
+    </tr>
+
+    {% for field in form %}
+        {% if field.name == 'footprint_electricity'    %}
+        {{formfield_errors field.name}}
+
+        <tr>
+            {{ for choice in field }}
+            <td>{{ choice }}</td>
+            {{ endfor }}
+        </tr>
+    {% endif %}
+
+{{ endfor }}
+</table>
+<br>
+
+
+<div class="next-btn radiotable">
+    <div style="float: right; padding-top: 2vh;">
+        <button id="nextst"  style=" margin-top: 4vh;" class="otree-btn-next btn btn-primary">{{Lexicon.next}}</button>
+ 
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'global/js/functions.js' %}" defer></script>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        setWidthForTableColumns1();
+    });
+
+    $(document).ready(function () {
+        for (let i = 0; i < js_vars.form_fields.length; i++) {   
+            prop= js_vars.form_fields[i] + 'Label'
+            label = js_vars.form_field_labels[i]
+            id = 'id_' + js_vars.form_fields[i]
+            $('#' + id).html(label)
+        }
+
+
+    })
+
+</script>
+{% endblock %}

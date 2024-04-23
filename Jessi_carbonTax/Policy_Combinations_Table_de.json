@@ -1,0 +1,77 @@
+
+{
+    "PolicyTable": [
+        [
+            "<b>Allgemein auf alle Emissionen</b>", 
+            "<b>60€/Tonne</b>",
+            "<b>Auszahlung an Bürger</b>",
+            "<b>in 1 Jahr</b>"
+        ],
+        [
+            "<b>Fleisch & Milchprodukte</b>", 
+            "<b>120€/Tonne</b>", 
+            "<b>Auszahlung an Bürger</b>",
+            "<b>in 1 Jahr</b>"
+        ],
+        [
+            "<b>Energieerzeugung</b>", 
+            "<b>120€/Tonne</b>", 
+            "<b>Auszahlung an Bürger</b>",
+            "<b>in 1 Jahr</b>"
+        ],
+        [
+            "<b>Allgemein auf alle Emissionen</b>", 
+            "<b>60€/Tonne</b>", 
+            "<b>Investition in Carbon Dioxide Removal</b>",
+            "<b>in 1 Jahr</b>"
+        ],
+        [
+            "<b>Energieerzeugung</b>", 
+            "<b>60€/Tonne</b>",
+            "<b>Investition in Carbon Dioxide Removal</b>",
+            "<b>in 1 Jahr</b>"
+        ],
+        [
+            "<b>Fleisch & Milchprodukte</b>", 
+            "<b>120€/Tonne</b>",
+            "<b>Investition in Carbon Dioxide Removal</b>",
+            "<b>in 1 Jahr</b>"
+        ],
+        [
+            "<b>Fleisch & Milchprodukte</b>", 
+            "<b>60€/Tonne</b>",
+            "<b>Auszahlung an Bürger</b>",
+            "<b>in 7 Jahren</b>"
+        ],
+        [
+            "<b>Energieerzeugung</b>", 
+            "<b>60€/Tonne</b>",
+            "<b>Auszahlung an Bürger</b>",
+            "<b>in 7 Jahren</b>"
+        ],
+        [
+            "<b>Allgemein auf alle Emissionen</b>", 
+            "<b>120€/Tonne</b>",
+            "<b>Auszahlung an Bürger</b>",
+            "<b>in 7 Jahren</b>"
+        ],
+        [
+            "<b>Fleisch & Milchprodukte</b>", 
+            "<b>60€/Tonne</b>",
+            "<b>Investition in Carbon Dioxide Removal</b>",
+            "<b>in 7 Jahren</b>"
+        ],
+        [
+            "<b>Allgemein auf alle Emissionen</b>", 
+            "<b>120€/Tonne</b>", 
+            "<b>Investition in Carbon Dioxide Removal</b>",
+            "<b>in 7 Jahren</b>"
+        ],
+        [
+            "<b>Energieerzeugung</b>", 
+            "<b>120€/Tonne</b>",
+            "<b>Investition in Carbon Dioxide Removal</b>",
+            "<b>in 7 Jahren</b"
+        ]
+    ]
+}

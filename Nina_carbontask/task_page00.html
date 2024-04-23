@@ -1,0 +1,219 @@
+
+
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+{% endblock %}
+
+{{ block title }} 
+    {{Lexicon.title}}
+{{ endblock }}
+{{ block content }}
+<meta charset="UTF-8">
+
+
+<style>
+
+/* Adjust the max-width as needed */
+    @media only screen and (min-width: 701px) {
+        .radiotable {
+            width: 60%;
+            padding: 20px 20px; 
+        }
+    }
+
+    @media only screen and (max-width: 700px) {
+        .radiotable {
+            width: 100%;
+            padding: 30px 40px; 
+        }
+    }
+    /* Adjust spacing between sentences */
+    .sentence {
+        margin: 0;
+        /* Adjust this value to control spacing between sentences */
+        padding: 0;
+        /* Optionally adjust padding if needed */
+        line-height: 0.5;
+    }
+    .question {
+        margin: 0;
+        /* Adjust this value to control spacing between sentences */
+        padding: 0;
+        /* Optionally adjust padding if needed */
+        line-height: 0.5;
+        size: 17
+    }
+
+    .info {
+        margin: 0;
+        /* Adjust this value to control spacing between sentences */
+        padding: 0;
+        /* Optionally adjust padding if needed */
+        line-height: 0.2;
+        size: 10
+    }
+   
+
+    table, th, tr{
+        border: 1px solid;
+        border-left: none;
+        border-right: none;
+        padding: 30px 30px 20px 20px; 
+
+    }
+
+
+    td.image {
+        width: 100px;
+    }
+
+    td.type {
+        width: 100px;
+    }
+
+
+
+    .radiotable, tr, th{
+
+        border: none;
+        text-align: left;
+        border: none;
+        border-top: none;
+    }
+
+    
+
+
+   
+
+    /* .image {
+        width: 125px;
+    } */
+</style>
+
+<p style="text-align: left; font-size: 0.9rem;">
+    {{Lexicon.round}} {{round_number}} {{Lexicon.round_zh}} {{Lexicon.out_of}} 
+    <br>
+</p>
+
+
+<div class=".question" > 
+    <p>
+        {{ Lexicon.instruction_task }}
+    <br>
+</div>
+
+
+<table id="currentFootprintTable">
+
+</table>
+<br>
+<br>
+<meta charset="UTF-8">
+
+<div > 
+    <table class="radiotable"  style=" table-layout: fixed;  max-width:130%;    overflow-x: auto;" >
+        <tr>  <th  class="radiotable-column"  >  {{ Lexicon.small }}</th>  
+            <th class="radiotable-column" > 2  </th> 
+            <th class="radiotable-column" >  3 </th> 
+            <th class="radiotable-column" > 4  </th> 
+            <th class="radiotable-column" > 5 </th>  
+            <th class="radiotable-column" > 6 </th>  
+            <th class="radiotable-column"  > 7  </th> 
+            <th class="radiotable-column" > 8 </th>  
+            <th class="radiotable-column" > 9 </th> 
+            <th  class="radiotable-column"  > {{ Lexicon.large }}</th>  
+        </tr>
+    <meta charset="UTF-8">
+        {{ for field in form }}
+            <tr  >
+                {{ for choice in field }}
+                <th style="  background:#2a9e92;" > {{ choice }} </th> 
+               
+                {{ endfor }}
+            </tr>
+        {{ endfor }}
+    </table>
+</div>
+
+<div class=".info">
+    <p>
+       <i> {{Lexicon.task_info}} </i> <br>
+    </p>
+</div>
+
+<div >
+    <button id="nextst" style="float: right; margin-top: 2vh;" disabled class="otree-btn-next btn btn-primary">{{Lexicon.next}}</button>
+ 
+</div>
+{% endblock %}
+
+
+
+{% block scripts %}
+<meta charset="UTF-8">
+<script>
+    var LANGUAGE_CODE = LANGUAGE_CODE
+    var currentBehaviors = "{{current_footprint_table}}"
+    currentBehaviors = eval(currentBehaviors)
+    var currentImages = "{{current_footprint_table_images}}"
+    currentImages = eval(currentImages)
+    var behaviorTypes = "{{behaviorTYPES}}"
+    behaviorTypes = eval(behaviorTypes)
+    var random_behavior_order = '{{random_behavior_order}}'
+    random_behavior_order = eval(random_behavior_order)
+    var behaviorTypesDict = {}
+    
+    random_behavior_order.forEach((random_behavior_order, i) => behaviorTypesDict[random_behavior_order] = behaviorTypes[i]);
+    console.log(behaviorTypesDict)
+
+
+    fillTable = function () {
+        console.log("hello istarted")
+        for (let i = 0; i < currentBehaviors.length & i <currentImages.length ; i++) {
+           
+            thisCurrType = behaviorTypes[random_behavior_order[i]]
+            thisCurrBeh = currentBehaviors[i]
+            thisCurrImg = currentImages[i]
+            var mytable = document.getElementById("currentFootprintTable");
+
+            // Create an empty <tr> element and add it to the 1st position of the table:
+            var row = mytable.insertRow(-1);
+
+            // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+
+            // Add some text to the new cells:
+            cell1.innerHTML = thisCurrType;
+            cell1.classList.add("type")
+            cell2.innerHTML = thisCurrBeh;
+            cell2.classList.add("behavior")
+            imgString = `<img  style="width:55%; "  src=/static/global/images/` + thisCurrImg + `.png>`
+            cell3.innerHTML =  imgString
+            cell3.classList.add("image")
+
+
+        }
+     }
+
+    enablebtn = function () {
+        document.getElementById("nextst").disabled = false;
+    }
+
+
+
+
+    window.onload = function () {
+
+        fillTable()
+        setTimeout(function () { enablebtn() }, 3 * 1000);
+
+
+
+    }
+</script>
+
+{{ endblock }}

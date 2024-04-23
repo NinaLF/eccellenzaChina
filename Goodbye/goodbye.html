@@ -1,0 +1,40 @@
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+{% endblock %}
+
+
+{% block title %}
+{{ Lexicon.goodbye_header }}
+{% endblock %}
+
+
+{% block content %} 
+
+<p> {{ Lexicon.goodbye_text }} </p>
+
+<p>
+
+ 
+<button class="btn btn-primary btn-large reps" style="margin-top:3vh;" type="button" onclick="redirectToThankYouPage()"> {{Lexicon.finish}} </button>
+</p>
+
+{% endblock %}
+
+ {% block scripts %}
+    <script>
+        function redirectToThankYouPage() {
+         // Get the participant's label value
+            var participantLabel = "{{ participant.label }}"; 
+ 
+         // Get the link from Lexicon var link = "{{ Lexicon.link }}"; // This syntax may vary depending on your templating language
+ 
+         // Construct the URL with the participant's label as a parameter
+            var url = "https://www.innofact1.com/studio/st/ub5/?sprung=ok&var=1&u=" +  encodeURIComponent(participantLabel);
+ 
+         // Redirect to the constructed URL
+            window.location.href = url;
+        }
+    </script>
+
+{% endblock %}

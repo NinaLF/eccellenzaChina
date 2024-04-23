@@ -1,0 +1,11 @@
+
+{% block styles %}
+    <link href="{{ static 'global/css/Carbontask.css'}}" rel="stylesheet">
+{% endblock %}
+
+{{ block title }}Emotions towards a carbon tax{{ endblock }}
+{{ block content }}
+
+<input style="width:100%" type="range" min="-100" max="100" value="0" step="1" class="slider" id="range_party" name="range_party">
+
+{{endblock}}          

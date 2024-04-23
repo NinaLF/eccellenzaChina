@@ -1,0 +1,42 @@
+{% block title %}
+{{Lexicon.screenout_title}}
+{% endblock %}
+
+{% block styles %}
+<link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+{{if player.session.langcode = "en"}}
+<meta http-equiv="refresh" content="2; url=https://www.google.com/screenout?participant_id={{player.participant.label}}"> 
+{% endblock %}
+
+{% block content %}
+
+<div>
+
+  <p> {{Lexicon.screenout_sentence}} </p> 
+  
+
+
+
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+  // Get the participant label or value from your code
+  var participantLabel = "{{ participant.label }}";
+  
+  // Get the link from Lexicon  
+  // Construct the URL with the participant variable
+  var urlWithParticipant = "https://www.innofact1.com/studio/st/ub5/?sprung=ok&var=2&u=" + encodeURIComponent(participantLabel);
+  
+  // Create a meta refresh tag dynamically
+  var metaTag = document.createElement('meta');
+  metaTag.setAttribute('http-equiv', 'refresh');
+  metaTag.setAttribute('content', '2; url=' + urlWithParticipant);
+  
+  // Add the meta refresh tag to the head of the document
+  document.head.appendChild(metaTag);
+</script>
+{% endblock %}

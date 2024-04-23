@@ -1,0 +1,54 @@
+
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{{ Lexicon.behaviors_title}}
+{% endblock %}
+
+{% block content %}
+<br>
+{{ Lexicon.intro_a}}
+<br>
+
+<br>
+
+{{ formfield 'footprint_flying_short' label=Lexicon.flying_short_label}} 
+{{ formfield 'footprint_flying_mid' label=Lexicon.flying_mid_label}} 
+{{ formfield 'footprint_flying_long' label=Lexicon.flying_long_label}} 
+
+<br>
+
+<div class="next-btn radiotable">
+    <div style="float: right; padding-top: 2vh;">
+        <button id="nextst"  style=" margin-top: 4vh;" class="otree-btn-next btn btn-primary">{{Lexicon.next}}</button>
+ 
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'global/js/functions.js' %}" defer></script>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        setWidthForTableColumns1();
+    });
+
+    $(document).ready(function () {
+        for (let i = 0; i < js_vars.form_fields.length; i++) {   
+            prop= js_vars.form_fields[i] + 'Label'
+            label = js_vars.form_field_labels[i]
+            id = 'id_' + js_vars.form_fields[i]
+            $('#' + id).html(label)
+        }
+
+
+    })
+
+</script>
+{% endblock %}

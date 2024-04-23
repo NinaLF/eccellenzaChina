@@ -1,0 +1,193 @@
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+{% endblock %}
+
+{{ block title }}
+<h1 style="text-align: center;">{{Lexicon.title_taskPage}}</h1> 
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    /* Adjust spacing between sentences */
+    .sentence {
+        margin: 0;
+        /* Adjust this value to control spacing between sentences */
+        padding: 0;
+        /* Optionally adjust padding if needed */
+        line-height: 1.5;
+    }
+    .question {
+        margin: 0;
+        /* Adjust this value to control spacing between sentences */
+        padding: 0;
+        /* Optionally adjust padding if needed */
+        line-height: 0.5;
+        size: 17;
+        text-align: center;
+    }
+
+    .info {
+        margin: 0;
+        /* Adjust this value to control spacing between sentences 
+        padding: 0;
+        /* Optionally adjust padding if needed */
+        line-height: 0.5;
+        size: 15;
+    }
+    
+    td {
+        padding:10px;
+    }
+    
+    #currentPolicyTable {
+        margin: 0 auto; /* Center the entire table horizontally */
+    }
+
+    table, th, tr{
+        border: 1px solid;
+        border-left: none;
+        border-right: none;
+        text-align: left;
+    }
+
+    td.type {
+        width: 200px;
+    }
+</style>
+
+    <div class=".question" style="text-align: center;">
+        <p> 
+            <br>
+            <b>{{Lexicon.instr_taskPage}}<br> </b> 
+        </p>
+    </div>
+
+    <br>
+    <div>
+        <table id="currentPolicyTable">
+
+        </table>
+    
+    </div>
+
+
+    <br>
+    <p style="text-align: center;">
+       <b>{{Lexicon.would_accept}}</b> 
+    </p>
+   
+    <br>
+
+    <div style="text-align: center;">
+        <button style="height:60px;width:60px; background:#2a9e92;color:white;border-radius: 5px;" id="accept1" name="accept" disabled value = "1" >{{Lexicon.accept_yes}}</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+        <button style="height:60px;width:60px; background:#2a9e92;color:white;border-radius: 5px;" id="accept2" name="accept" disabled value = "2" >{{Lexicon.accept_no}}</button>
+    </div>
+
+    <br>
+    <br>
+
+    <div class=".info" style="text-align: center;">
+            <p> {{Lexicon.helpText}} <a href='#' id="helpLink">{{Lexicon.helpButton}}</a>.</p>
+        <div id="example" style="display:none">
+            <div style="text-align: left;">
+                <p>
+                <ul class="help">
+                <li> <b> {{Lexicon.helpSector}} </b> </li>
+                    <ul>
+                    <li> {{Lexicon.helpSectorText}}  </li>
+                    </ul>
+                <li> <b> {{Lexicon.helpTiming}} </b> </li>
+                    <ul>
+                    <li> {{Lexicon.helpTimingText}} </li>
+                    </ul>
+                <li> <b> {{Lexicon.helpPrice}} </b> </li>
+                    <ul>
+                    <li> {{Lexicon.helpPriceText}} </li>
+                    </ul>
+                <li> <b> {{Lexicon.helpRevenue}} </b> </li>
+                    <ul>
+                    <li> {{Lexicon.helpRevenueText}} </li>
+                    </ul>
+                </ul>
+                </p>
+                <a href='#' id="closeLink"> {{Lexicon.helpClose}} </a>
+    
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    var exampleDiv = document.getElementById("example");
+    var helpLink = document.getElementById("helpLink");
+    var closeLink = document.getElementById("closeLink");
+
+    helpLink.addEventListener("click", function () {
+        exampleDiv.style.display = "block";
+    });
+
+    closeLink.addEventListener("click", function () {
+        exampleDiv.style.display = "none";
+    });
+
+
+    var LANGUAGE_CODE = LANGUAGE_CODE
+    var currentPolicy = "{{current_policy_table}}"
+    currentPolicy = eval(currentPolicy)
+
+    var Attributes = "{{Attributes}}"
+    Attributes = eval(Attributes)
+    var random_attribute_order = '{{random_attribute_order}}'
+    random_attribute_order = eval(random_attribute_order)
+    var AttributesDict = {}
+    
+    random_attribute_order.forEach((random_attribute_order, i) => AttributesDict[random_attribute_order] = Attributes[i]);
+    console.log(AttributesDict)
+
+
+    fillTable = function () {
+        console.log("hello istarted")
+        for (let i = 0; i < currentPolicy.length; i++) {
+            thisCurrAttr = Attributes[random_attribute_order[i]]
+            thisCurrPol = currentPolicy[i]
+            var mytable = document.getElementById("currentPolicyTable");
+
+            // Create an empty <tr> element and add it to the 1st position of the table:
+            var row = mytable.insertRow(-1);
+
+            // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+
+            // Add some text to the new cells:
+            cell1.innerHTML = thisCurrAttr;
+            cell1.classList.add("Attribute")
+            cell2.innerHTML = thisCurrPol;
+            cell2.classList.add("Policy")
+
+
+        }
+     }
+
+
+    enablebtn1 = function () {
+        document.getElementById("accept1").disabled = false;
+    }
+    enablebtn2 = function () {
+        document.getElementById("accept2").disabled = false;
+    } 
+
+    window.onload = function () {
+
+        fillTable()
+        setTimeout(function () { enablebtn1(); enablebtn2() },  3*500);
+    }
+
+</script>
+{{ endblock }}

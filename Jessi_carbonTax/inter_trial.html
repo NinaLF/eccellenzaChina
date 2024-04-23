@@ -1,0 +1,30 @@
+{% block styles %}
+    <link href="{{ static 'global/css/Carbontask.css'}}" rel="stylesheet">
+{% endblock %}
+
+{{ block content }}
+<style>
+    .otree-timer {
+        display: none;
+    }
+
+    #fixation-cross {
+        text-align: center;
+        font-size: 100px; /* Adjust the font size as needed to make it bigger */
+        position: relative;
+        top: 110%;
+        left: 45%;
+        transform: translate(-50%, 50%);
+    }
+</style>
+    
+<p id="fixation-cross"><b>+</b></p>
+
+    <div>
+        <button hidden name="filler_ITI" value = "True"></button>
+    
+    </div>
+
+{{ endblock }}
+
+
