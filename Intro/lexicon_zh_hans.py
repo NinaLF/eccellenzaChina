@@ -33,11 +33,11 @@ class Lexicon:
     
     consent_bullet1 = "报告一些人口统计信息，例如您的年龄。"
     consent_bullet2 = "完成一组调查问卷。 您将被询问对不同主题的态度和观点。"
-    consent_bullet3 = '您将完成 3 项不同的实验任务，并针对不同主题进行多轮实验 '
+    consent_bullet3 = '您将完成 2 项不同的实验任务，并针对不同主题进行多轮实验 '
 
     ## Achtung hier richtige dauer
     duration = "时长："
-    consent_p3 = "参与这项研究大约需要您<b>30 分钟</b>的时间。"
+    consent_p3 = "参与这项研究大约需要您<b>20-25 分钟</b>的时间。"
     
     ## Achtung hier  marktforschungsinstitut
     risks = "风险和收益："
