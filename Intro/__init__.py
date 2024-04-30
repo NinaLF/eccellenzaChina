@@ -114,7 +114,7 @@ class Consent(Page):
                 #insert session link for Order_Jessi_Nina
                 stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/nelivuhu?participant_label=" + player.participant.label
             else:
-                if random() < 0.5: 
+                if random.random() < 0.5: 
                     #insert session link for Nina First
                     stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/johidaku?participant_label=" + player.participant.label
                 else: 
