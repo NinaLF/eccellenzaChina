@@ -271,36 +271,25 @@ class Screenout(Page):
    
     
 
-class WVValues(Page):
-    @staticmethod
-    def get_form_fields(player):
-        if player.session.config['language'] == "zh_hans":
-            return ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV',  'ind2', 'ind3']
-        else:
-            return ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV', 'ind2', 'ind3', "polOrientation"]
+class WVValues(Page):      
     form_model = 'player'
+    formfields = ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV',  'ind2', 'ind3']
+
     @staticmethod
     def vars_for_template(player: Player):
         return dict(Lexicon=player.session.firstBlockLexi)
     @staticmethod
     def js_vars(player):
         Lexicon = player.session.firstBlockLexi
-        if  player.session.config['language'] == "zh_hans":
-            return dict(
+        return dict(
             form_fields= ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV', 'ind2', 'ind3'],
-            form_field_labels = [Lexicon.hie1Label, Lexicon.hie2Label , Lexicon.hie3Label, Lexicon.ind1Label, Lexicon.attentionWVLabel, Lexicon.ind2Label, Lexicon.ind3Label],
-            langcode= "zh_hans")
-        else:
-            return dict(
-            form_fields= ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV', 'ind2', 'ind3', "polOrientation"],
-            form_field_labels = [Lexicon.hie1Label, Lexicon.hie2Label , Lexicon.hie3Label, Lexicon.ind1Label, Lexicon.attentionWVLabel, Lexicon.ind2Label, Lexicon.ind3Label, Lexicon.polOrientationLabel],
-            langcode="west")
+            form_field_labels = [Lexicon.hie1Label, Lexicon.hie2Label , Lexicon.hie3Label, Lexicon.ind1Label, Lexicon.attentionWVLabel, Lexicon.ind2Label, Lexicon.ind3Label]
+        )
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         correct = player.attentionWV == 10
         if( correct == False ):
                player.screenoutWV = True
-
 
 
 
