@@ -39,7 +39,15 @@ SESSION_CONFIGS = [
          app_sequence=['FirstBlock', 'Jessi_Instructions', 'Scales', 'Goodbye' ],
          language = "en",
          num_demo_participants=10,
-     )
+     ),
+      dict(
+         name='Intro_Redirection_en',
+  #      app_sequence=['survey','task'],
+         app_sequence=['Intro'],
+         consent_form="redirect",
+         language = "en",
+         num_demo_participants=10,
+     ),
      
      
 

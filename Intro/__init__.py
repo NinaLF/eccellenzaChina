@@ -80,17 +80,17 @@ class Consent(Page):
         if (player.participant.label == None):
             player.participant.label ="missing"
         
-         #insert session links for English
+         #insert session links for English THESE ARE FOR THE TEST LINK NOT REAL!!
         if(player.session.config['language']=="en"):   
             if(player.participant.order_tasks == 1):
                 #insert session link for Order_Nina_Jessi_Zahra
-                stringOrder = "http://psbc.otree.psychologie.unibas.ch/join/dikoludu?participant_label=" + player.participant.label 
+                stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/zerafovi?participant_label=" + player.participant.label 
             elif(player.participant.order_tasks == 2):
                 #insert session link for Order_Jessi_Zahra_Nina
-                stringOrder = "http://psbc.otree.psychologie.unibas.ch/join/jenavipu?participant_label=" + player.participant.label 
+                stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/zerafovi?participant_label=" + player.participant.label 
             else:
                 #insert session link for Order_Zahra_Nina_Jessi
-                stringOrder = "http://psbc.otree.psychologie.unibas.ch/join/voneraza?participant_label=" + player.participant.label
+                stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/zerafovi?participant_label=" + player.participant.label
 
         #insert session links for German
         if(player.session.config['language']=="de"):   

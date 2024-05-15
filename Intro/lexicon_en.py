@@ -20,12 +20,12 @@ class Lexicon:
 
     consent_bullet1 = 'Report some demographic information, including for example your age.'
     consent_bullet2= 'Complete a set of questionnaires. You will be asked about your attitudes and perspectives on different topics.'
-    consent_bullet3 = 'You will complete 3 different experimental tasks with multiple rounds on different topics'
+    consent_bullet3 = 'You will complete 2 different experimental tasks with multiple rounds on different topics'
     
     
     ## Achtung hier richtige dauer
     duration ='Duration: '
-    consent_p3 =' Participation in this study will require approximately <b>25-30 minutes</b> of your time.'
+    consent_p3 =' Participation in this study will require approximately <b>20-25 minutes</b> of your time.'
 
     ## Achtung hier richtige vergütung und währung und marktforschungsinstitut
     risks = 'Risks and Benefits: '
