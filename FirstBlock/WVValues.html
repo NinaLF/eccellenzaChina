@@ -30,22 +30,7 @@
         </div>
 
     {{endif}}  
-    {% if field.name == 'polOrientation'  %}
-    {{formfield_errors field.name}}
-        <button class="accordion" id={{field.id}} name={{field.name}}>Section 1</button>
-        <div class="accpanel">
-            <table style="width:90%; margin-left: auto; margin-right: auto;">
-                <tr style="padding: 5px;"> <td colspan="4" style="text-align: left; padding:0"> {{Lexicon.strongly_liberal}} </td>  <td colspan="2"> </td>  <td colspan="4" style="text-align: right;"> {{Lexicon.strongly_conservative}} </td> </tr>
-
-                <tr >
-                    {{ for choice in field }}            
-                            <td class="column accchoice" style="width: inherit; text-align: center; padding: 0px 5px 30px" data-parent={{field.id}} onclick="mark_answered($(this))">{{ choice }} </td>  
-                    {{ endfor }}
-                </tr>     
-            </table>
-        </div>
-
-    {{endif}}  
+   
 {{ endfor }}
 
 
