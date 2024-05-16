@@ -275,9 +275,9 @@ class WVValues(Page):
     @staticmethod
     def get_form_fields(player):
         if player.session.config['language'] == "zh_hans":
-            return ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV',  'ind2', 'ind3']
+            return ['hie1', 'hie2',  'attentionWV',  'ind2', 'ind3']
         else:
-            return ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV', 'ind2', 'ind3', "polOrientation"]
+            return ['hie1', 'hie2', 'attentionWV', 'ind2', 'ind3', "polOrientation"]
     form_model = 'player'
     @staticmethod
     def vars_for_template(player: Player):
