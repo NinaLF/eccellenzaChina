@@ -212,7 +212,7 @@ class Demographics(Page):
         if player.session.config['language'] == "zh_hans":
             return ['age',  'education']
         else:
-            return ['age',  'education']
+            return ['age',  'education', 'party']
     form_model = 'player'
     @staticmethod
     def vars_for_template(player: Player):
@@ -228,7 +228,7 @@ class Demographics(Page):
         else:
             return dict(
             form_fields= ['age',  'education', 'party'],
-            form_field_labels = [Lexicon.age_label,Lexicon.education_label  ],
+            form_field_labels = [Lexicon.age_label,Lexicon.education_label ,Lexicon.party_affiliation_label ],
             langcode="west")
 
 
@@ -277,7 +277,7 @@ class WVValues(Page):
         if player.session.config['language'] == "zh_hans":
             return ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV',  'ind2', 'ind3']
         else:
-            return ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV', 'ind2', 'ind3']
+            return ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV', 'ind2', 'ind3', "polOrientation"]
     form_model = 'player'
     @staticmethod
     def vars_for_template(player: Player):
@@ -287,13 +287,13 @@ class WVValues(Page):
         Lexicon = player.session.firstBlockLexi
         if  player.session.config['language'] == "zh_hans":
             return dict(
-            form_fields= ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV', 'ind2', 'ind3'],
-            form_field_labels = [Lexicon.hie1Label, Lexicon.hie2Label , Lexicon.hie3Label, Lexicon.ind1Label, Lexicon.attentionWVLabel, Lexicon.ind2Label, Lexicon.ind3Label],
+            form_fields= ['hie1', 'hie2','attentionWV', 'ind2', 'ind3'],
+            form_field_labels = [Lexicon.hie1Label, Lexicon.hie2Label ,  Lexicon.attentionWVLabel, Lexicon.ind2Label, Lexicon.ind3Label],
             langcode= "zh_hans")
         else:
             return dict(
-            form_fields= ['hie1', 'hie2', 'hie3', 'ind1', 'attentionWV', 'ind2', 'ind3'],
-            form_field_labels = [Lexicon.hie1Label, Lexicon.hie2Label , Lexicon.hie3Label, Lexicon.ind1Label, Lexicon.attentionWVLabel, Lexicon.ind2Label, Lexicon.ind3Label],
+            form_fields= ['hie1', 'hie2',  'attentionWV', 'ind2', 'ind3', "polOrientation"],
+            form_field_labels = [Lexicon.hie1Label, Lexicon.hie2Label , Lexicon.attentionWVLabel, Lexicon.ind2Label, Lexicon.ind3Label, Lexicon.polOrientationLabel],
             langcode="west")
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
