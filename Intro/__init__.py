@@ -109,17 +109,17 @@ class Consent(Page):
         if(player.session.config['language']=="zh_hans"):   
             if(player.participant.order_tasks == 1):
                 #insert session link for Order_Nina_Jessi
-                stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/johidaku?participant_label=" + player.participant.label
+                stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/soregivo?participant_label=" + player.participant.label
             elif(player.participant.order_tasks == 2):
                 #insert session link for Order_Jessi_Nina
-                stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/nelivuhu?participant_label=" + player.participant.label
+                stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/givitano?participant_label=" + player.participant.label
             else:
                 if random.random() < 0.5: 
                     #insert session link for Nina First
-                    stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/johidaku?participant_label=" + player.participant.label
+                    stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/soregivo?participant_label=" + player.participant.label
                 else: 
                     #insert for Jessi first
-                    stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/nelivuhu?participant_label=" + player.participant.label
+                    stringOrder = "http://psbc-china.otree.psychologie.unibas.ch/join/givitano?participant_label=" + player.participant.label
 
         return {
             'stringOrder': stringOrder,
