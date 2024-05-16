@@ -13,8 +13,7 @@
 
 
 {{ for field in form }}
-    {% if field.name == 'hie1' or field.name == 'hie2' or field.name == 'hie3' or field.name
-    == 'ind1' or field.name == 'ind2' or field.name == 'ind3' or field.name == 'attentionWV' %}
+    {% if field.name == 'hie1' or field.name == 'hie2' or field.name == 'ind2' or field.name == 'ind3' or field.name == 'attentionWV' %}
     {{formfield_errors field.name}}
         <button class="accordion" id={{field.id}} name={{field.name}}>Section 1</button>
         <div class="accpanel">
@@ -93,10 +92,10 @@
 var acc = document.getElementsByClassName("accordion");
         var maxid= 6
         if (js_vars.langcode == "zh_hans" ){
-            var idarray = ['id_hie1', 'id_hie2', 'id_hie3', 'id_ind1', 'id_attentionWV','id_ind2', 'id_ind3']
+            var idarray = ['id_hie1', 'id_hie2', 'id_attentionWV','id_ind2', 'id_ind3']
         }
         else {
-            var idarray = ['id_hie1', 'id_hie2', 'id_hie3', 'id_ind1', 'id_attentionWV', 'id_ind2', 'id_ind3', 'id_polOrientation']
+            var idarray = ['id_hie1', 'id_hie2',  'id_attentionWV', 'id_ind2', 'id_ind3', 'id_polOrientation']
         }
        
 
