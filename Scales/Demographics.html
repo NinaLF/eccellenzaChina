@@ -1,0 +1,48 @@
+{{ block title }}
+    Demographics
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .text {
+        font-size: 19px
+    }
+</style>
+
+
+<div class="text"> 
+    <br>
+    {{ formfield 'age' }}
+    <br>
+    {{ formfield 'gender' }}
+    <br>
+    {{ formfield 'education' }}
+    <br>
+    {{ formfield 'income' }} <br>
+    <br>
+    <p>
+        Some people describe political affiliation on a left to right spectrum.
+        Please indicate on the following scale ranging from 1 (extremely left) to 10 (extremely right) how you would classify yourself in terms of political ideology
+
+    <div class="radiotable" style="padding-top:0vh; padding-left:0vw; ">
+    <p> Overall, how would you describe your political attitudes and beliefs? </p>
+    <p style="text-indent: 0vw;">
+        extremely left &nbsp;
+        {{ for choice in form.polOrientation}}
+            {{ choice }}
+        {{ endfor }}
+        &nbsp; extremely right
+    </p>
+    <br>
+
+</div>
+
+</div>
+
+    <div class="next-btn radiotable">  
+        <div style="float: right; padding-top: 2vh;">
+             {% next_button %} 
+        </div>
+    </div> 
+{{ endblock }}

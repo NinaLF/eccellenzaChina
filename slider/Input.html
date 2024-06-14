@@ -1,0 +1,170 @@
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+{% endblock %}
+
+{{ block title }}
+    Task
+{{ endblock }}
+
+{% block content %}
+<style>
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+    .left-column {
+        flex: 2.5;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+    .right-column {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .mgslider-wrapper {
+        border-spacing: 5px;
+    }
+    .mgslider-limit {
+        width: 10%;
+        min-width: 65px;
+        height: 40px;
+        margin: 90px;
+        text-align: center;
+        background: #eee;
+        border: 1px solid #888;
+    }
+    .mgslider-limit, .mgslider-value {
+        font-variant-numeric: tabular-nums;
+    }
+    .mgslider-before {
+        height: 16px;
+        width: 100%;
+        background: #c9e7e4;
+    }
+    .mgslider-feedback {
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .mean-value {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+   
+    .slider-container {
+        margin-bottom: 10px;
+    }
+    .slider-label {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .slider-label img {
+        width: 50px;  /* Set the desired width */
+        height: auto;  /* Maintain aspect ratio */
+        margin-right: 20px;
+    }
+
+    .slider {
+        width: 100%;
+        margin: 0;
+        background-color: #c9e7e4;
+        background:  #c9e7e4;
+        color:  #e14b80;;
+    }
+    .mean-label {
+        background-color: #e7c9d9;
+        font-size: 18px;
+        font-weight: bold;
+    } 
+   
+</style>
+
+{{ formfield_errors 'recycling' }}
+{{ formfield_errors 'car' }}
+{{ formfield_errors 'meat' }}
+{{ formfield_errors 'flying' }}
+{{ formfield_errors 'nonRegionalFood' }}
+{{ formfield_errors 'greenelectricity' }}
+
+<p> Now, we ask you to make your own estimates, you can inform yourself from the other estimates or make your own <br> <br>
+
+    Click the  bars to reveal the sliders.
+</p>
+
+<div class="container" > 
+    <div class="left-column" > 
+        <div id="sliders_here" > </div>
+    </div>
+    
+    <div class="right-column" > 
+        <p> 
+            <h3>   </h3>
+            <br> <h3>  </h3>
+            <br><h3>  </h3>
+        </p>
+
+    </div>
+</div>
+
+
+
+<script src="{{ static 'global/mgslider.js' }}"></script>
+<script>
+    function liveSend(field, value) {
+        console.log(`Sending data: field=${field}, value=${value}`);
+        liveSendData({participant_id: js_vars.my_id, field: field, value: value});
+    }
+
+    function liveRecv(data) {
+        console.log('Received data:', data);
+        document.getElementById('mean_flying').innerText = data.flying ? data.flying.toFixed(2) : 'N/A';
+        document.getElementById('mean_meat').innerText = data.meat ? data.meat.toFixed(2) : 'N/A';
+        document.getElementById('mean_greenelectricity').innerText = data.greenelectricity ? data.greenelectricity.toFixed(2) : 'N/A';
+        document.getElementById('mean_nonRegionalFood').innerText = data.nonRegionalFood ? data.nonRegionalFood.toFixed(2) : 'N/A';
+        document.getElementById('mean_car').innerText = data.car ? data.car.toFixed(2) : 'N/A';
+        document.getElementById('mean_recycling').innerText = data.recycling ? data.recycling.toFixed(2) : 'N/A';
+    }
+
+    
+    $(document).ready(function (event) {
+        const sliders = [
+      
+            {id: 'flying', label: 'How much kg CO<sub>2</sub> does <b>taking one round-trip flight (i.e. 2 individual) medium distance (=3-6hours) emit?', imgSrc: '{{ static "global/images/flying.png" }}' },
+
+            {id: 'meat', label: 'How much kg CO<sub>2</sub> does <b> following an omnivorous diet which includes eating meat and dairy products regularly emit over the course of one year?</b>',  imgSrc: '{{ static "global/images/meat.png" }}'},
+            {id: 'greenelectricity', label: 'How much kg CO<sub>2</sub> <b> does a 7000 kWh energy demand of a person subscribed to a fossil based electricity supply (i.e. 60% fossil sources) emit?</b> ', imgSrc: '{{ static "global/images/energy.png" }}' },
+            {id: 'nonRegionalFood', label: 'How much kg CO<sub>2</sub>  <b> does buying and eating imported food items that are not grown in your country or region additionally emit ? </b>', imgSrc: '{{ static "global/images/regional.png" }}'},
+            {id: 'car', label: 'How much kg CO<sub>2</sub> does <b> a public bus commute of a total of 12.5 miles everyday, 5 days a week for 48 weeks per year emit across one year </b>?', imgSrc: '{{ static "global/images/commute.png" }}'},
+
+            {id: 'recycling', label: 'How much kg CO<sub>2</sub> does it emit <b> not to recycle materials that could be recycled (i.e. glass, paper, aluminum)? </b>' ,imgSrc: '{{ static "global/images/recycling.png" }}' },
+        ];
+
+        sliders.forEach(slider => {
+            $('#sliders_here').append(`<div class="slider-label">
+                <img src="${slider.imgSrc}" alt="${slider.label}">
+                <label for="${slider.id}">${slider.label}</label>
+            </div>`);
+            const newSlider = new mgslider(slider.id, 0, 2500, 10);
+            newSlider.print(document.getElementById("sliders_here"));
+
+            newSlider.onchange = function(value) {
+                liveSend(slider.id, value);
+                console.log(`Slider ${slider.id} value: ${value}`);
+            };
+        });
+    });
+</script>
+
+<div class="next-btn radiotable">  
+    <div style="float: right; padding-top: 2vh;">
+         {% next_button %} 
+    </div>
+</div> 
+
+
+{{ endblock }}

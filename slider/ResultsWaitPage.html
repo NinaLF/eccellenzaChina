@@ -1,0 +1,22 @@
+{% load static %}
+
+{{ block title }}
+    Please Wait
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .wait-message {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 50px;
+    }
+</style>
+
+<div class="wait-message">
+    We are waiting for other people to give their inputs. So far, {{ completed_count }} inputs have been received. Please wait...
+</div>
+
+{{ endblock }}

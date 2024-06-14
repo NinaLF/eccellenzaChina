@@ -1,0 +1,222 @@
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+
+
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .left-column {
+            flex: 2.5;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+        .right-column {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .mgslider-wrapper {
+            border-spacing: 5px;
+        }
+        .mgslider-limit {
+            width: 10%;
+            min-width: 65px;
+            height: 40px;
+            margin: 90px;
+            text-align: center;
+            background: #eee;
+            border: 1px solid #888;
+        }
+        .mgslider-limit, .mgslider-value {
+            font-variant-numeric: tabular-nums;
+        }
+        .mgslider-before {
+            height: 16px;
+            width: 100%;
+            background: #c9e7e4;
+        }
+        .mgslider-feedback {
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    
+        .mean-value {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    
+        .slider-container {
+            margin-bottom: 10px;
+        }
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+    
+        .slider-label img {
+            width: 50px;  /* Set the desired width */
+            height: auto;  /* Maintain aspect ratio */
+            margin-right: 20px;
+        }
+    
+        .slider {
+            width: 100%;
+            margin: 0;
+            background-color: #c9e7e4;
+            color: #e14b80;
+        }
+        .mean-label {
+            background-color: #e7c9d9;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+    
+{% endblock %}
+
+{{ block title }}
+    Instructions on your task
+{{ endblock }}
+
+{{ block content }}
+<div>
+    <br> 
+    You will make your estimates on the left part of your screen.  <br> <br> 
+    On the right part of your screen you will see the estimations other participants within this experiment have made. <br>
+    You are free to use this information to inform your own estimates, or ignore the information and come up with your own estimates.<br>
+    <br> 
+
+
+</div>
+
+<div id="mean_values">
+    <div class="slider-container">
+        <p>Mean estimate by others regarding how much kg CO<sub>2</sub> does <b>taking one round-trip flight (i.e. 2 individual) medium distance (=3-6hours) emit?</b> </p>
+        <div class="slider-label">
+            <span>0</span>
+            <span id="mean_flying_label" class="mean-label">{{ means.flying }}</span>
+            <span>2500</span>
+        </div>
+        <input type="range" min="0" max="2500" id="mean_flying_slider" class="slider" disabled>
+    </div>
+
+    <div class="slider-container">
+        <p>Mean estimate by others regarding how much kg CO<sub>2</sub> does <b> following an omnivorous diet which includes eating meat and dairy products regularly emit over the course of one year?</b> </p>
+        <div class="slider-label">
+            <span>0</span>
+            <span id="mean_meat_label" class="mean-label">{{ means.meat }}</span>
+            <span>2500</span>
+        </div>
+        <input type="range" min="0" max="2500" id="mean_meat_slider" class="slider" disabled>
+    </div>
+
+    <div class="slider-container">
+        <p>Mean estimate by others regarding how much kg CO<sub>2</sub> <b> does a 7000 kWh energy demand of a person subscribed to a fossil based electricity supply (i.e. 60% fossil sources) emit?</b></p>
+        <div class="slider-label">
+            <span>0</span>
+            <span id="mean_greenelectricity_label" class="mean-label">{{ means.greenelectricity }}</span>
+            <span>2500</span>
+        </div>
+        <input type="range" min="0" max="2500" id="mean_greenelectricity_slider" class="slider" disabled>
+    </div>
+
+    <div class="slider-container">
+        <p>Mean estimate by others regarding how much kg CO<sub>2</sub> <b> does buying and eating imported food items that are not grown in your country or region additionally emit ?</b></p>
+        <div class="slider-label">
+            <span>0</span>
+            <span id="mean_nonRegionalFood_label" class="mean-label">{{ means.nonRegionalFood }}</span>
+            <span>2500</span>
+        </div>
+        <input type="range" min="0" max="2500" id="mean_nonRegionalFood_slider" class="slider" disabled>
+    </div>
+
+    <div class="slider-container">
+        <p>Mean estimate by others regarding how much kg CO<sub>2</sub> does <b> a public bus commute of a total of 12.5 miles everyday, 5 days a week for 48 weeks per year emit across one year? </b></p>
+        <div class="slider-label">
+            <span>0</span>
+            <span id="mean_car_label" class="mean-label">{{ means.car }}</span>
+            <span>2500</span>
+        </div>
+        <input type="range" min="0" max="2500" id="mean_car_slider" class="slider" disabled>
+    </div>
+
+    <div class="slider-container">
+        <p>Mean estimate by others regarding how much kg CO<sub>2</sub> does it emit <b> not to recycle materials that could be recycled (i.e. glass, paper, aluminum)? </b></p>
+        <div class="slider-label">
+            <span>0</span>
+            <span id="mean_recycling_label" class="mean-label">{{ means.recycling }}</span>
+            <span>2500</span>
+        </div>
+        <input type="range" min="0" max="2500" id="mean_recycling_slider" class="slider" disabled>
+    </div>
+</div>
+
+
+<script>
+    function setSliderValue(sliderId, value) {
+        var slider = document.getElementById(sliderId);
+        if (value !== null && value !== undefined) {
+            slider.value = value;
+            var percentage = (value / slider.max) * 100;
+            slider.style.background = `linear-gradient(to right, #c9e7e4 ${percentage}%, #ddd ${percentage}%)`;
+        }
+    }
+
+    function liveRecv(data) {
+        console.log('Received data:', data);
+        document.getElementById('mean_flying_label').innerText = data.flying ? data.flying.toFixed(2) : 'No data yet';
+        document.getElementById('mean_nonRegionalFood_label').innerText = data.nonRegionalFood ? data.nonRegionalFood.toFixed(2) : 'No data yet';
+        document.getElementById('mean_meat_label').innerText = data.meat ? data.meat.toFixed(2) : 'No data yet';
+        document.getElementById('mean_greenelectricity_label').innerText = data.greenelectricity ? data.greenelectricity.toFixed(2) : 'No data yet';
+        document.getElementById('mean_car_label').innerText = data.car ? data.car.toFixed(2) : 'No data yet';
+        document.getElementById('mean_recycling_label').innerText = data.recycling ? data.recycling.toFixed(2) : 'No data yet';
+
+        setSliderValue('mean_flying_slider', data.flying);
+        setSliderValue('mean_meat_slider', data.meat);
+        setSliderValue('mean_greenelectricity_slider', data.greenelectricity);
+        setSliderValue('mean_nonRegionalFood_slider', data.nonRegionalFood);
+        setSliderValue('mean_car_slider', data.car);
+        setSliderValue('mean_recycling_slider', data.recycling);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        setSliderValue('mean_flying_slider', {{ means.flying | default(0) | safe }});
+        setSliderValue('mean_meat_slider', {{ means.meat | default(0) | safe }});
+        setSliderValue('mean_greenelectricity_slider', {{ means.greenelectricity | default(0) | safe }});
+        setSliderValue('mean_nonRegionalFood_slider', {{ means.nonRegionalFood | default(0) | safe }});
+        setSliderValue('mean_car_slider', {{ means.car | default(0) | safe }});
+        setSliderValue('mean_recycling_slider', {{ means.recycling | default(0) | safe }});
+
+        // Add user input sliders
+        
+    });
+</script>
+
+<script>
+
+
+    enablebtn = function () {
+        document.getElementById("nextst").disabled = false;
+    }
+
+
+
+    window.onload = function () {
+        setTimeout(function () { enablebtn() }, 7 * 1000);
+    }
+</script>
+
+<div >
+    <button id="nextst" style="float: right; margin-top: 2vh;" disabled class="otree-btn-next btn btn-primary"> Next </button>
+
+</div>
+
+
+{% endblock %}

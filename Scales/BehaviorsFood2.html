@@ -1,0 +1,39 @@
+
+{% block styles %}
+
+{% endblock %}
+
+{% block title %}
+    Behavior
+{% endblock %}
+
+{% block content %}
+<br>
+
+
+<style>
+    .text {
+        font-size: 19px
+    }
+</style>
+
+
+<div class="text"> 
+    <br>
+    {{ formfield 'footprint_regional' }}
+    <br>
+    {{ formfield 'footprint_electricity' }}
+    <br>
+
+    <br>
+
+</div>
+
+</div>
+
+    <div class="next-btn radiotable">  
+        <div style="float: right; padding-top: 2vh;">
+             {% next_button %} 
+        </div>
+    </div> 
+{{ endblock }}
