@@ -269,6 +269,10 @@ class Player(BasePlayer):
     climate_change_concern2 = make_field('Climate protection is important for our future.')
     climate_change_concern3 = make_field('We must protect the climate´s delicate equilibrium.')
     climate_change_concern4 = make_field('Climate change has severe consequences for humans and nature.')
+
+    UnitUnderstanding =  models.IntegerField( widget=widgets.RadioSelect,  label="How much difficulty did you have understanding and imaging 'kg' ",
+                                          choices=[['1', 'no problem with the unit (1)'], ['2', '2'], ['3', '3'],['4', '4'], ['5', '5'], ['6', '6'], ['7', '7'],['8', '8'], ['9', '9'],  ['10', ' lots of difficulty (10)'] ] ) 
+
     
    
 
@@ -323,7 +327,10 @@ class policyScales(Page):
     form_model = 'player'
     form_fields= ['policy_commute', 'policy_flying', 'policy_electricity', 'policy_diet', 'policy_recycling', 'policy_regional' ]
    
-
+class unit(Page):
+    form_model = 'player'
+    form_fields= ['UnitUnderstanding']
+    
 class Demographics(Page):
      form_model = 'player'
      form_fields= [ 'age', 'gender', 'education', 'income', 'polOrientation' ]
@@ -335,7 +342,7 @@ class End(Page):
 
 
 
-page_sequence = [  BehaviorsFood, BehaviorsFood2, BehaviorsTransport, BehaviorsFlying, policyScales, ClimateConcern, Demographics, End
+page_sequence = [  BehaviorsFood, BehaviorsFood2, BehaviorsTransport, BehaviorsFlying, policyScales, ClimateConcern, unit, Demographics, End
     # Belief,  Belief1, CCEmotion,
      #            BehaviorsFood, BehaviorsFood2, BehaviorsTransport, BehaviorsFlying, 
              #    PITrust, IBValues ,
