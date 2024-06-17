@@ -182,7 +182,7 @@ class Player(BasePlayer):
     footprint_flying_mid = models.IntegerField(min=0, max= 300 , label = "How many <b> mid-distance flights (3-6 hours) </b> did you take on average in the past two years? <i> i: one round-trip flight counts as two flights. So if you flew from New York to San Francisco and back this counts as 2 flights. </i> ")
     footprint_flying_long = models.IntegerField(min=0, max= 300, label= "How many <b> long-distance flights (>6 hours) </b> did you take on average in the past two years? <i> i: one round-trip flight counts as two flights. So if you flew from Miami to London and back this counts as 2 flights. </i> " )
 
-    footprint_commute_car =  models.StringField(label= "How many miles do you <b> annually drive in a car </b> or on a motorcycle (outside of work times, both driving and as a passenger)?", widget=widgets.RadioSelect,
+    footprint_commute_car =  models.StringField(label= "How many miles do you annually drive in a car  or on a motorcycle (outside of work times, both driving and as a passenger)?", widget=widgets.RadioSelect,
                                                 choices = [['never' , ' I never use a car or motorcycle'],
                                                            ['less_than_A', '1 - 1,244 miles'], 
                                                            ['A_to_B',  '1,245 - 4,659 miles'],
@@ -200,7 +200,7 @@ class Player(BasePlayer):
                                                         ['NaturalGas',  'Natural gas' ],
                                                         ['Diesel', 'Gasoline/Diesel/Hybrid' ]]
                                                    )
-    footprint_commute_pt =  models.StringField(label="How many miles do you <b> commute weekly in public transport </b> (train, bus, etc.)or an e-bike? Please calculate all private journeys including the work commute, but not business travels." ,
+    footprint_commute_pt =  models.StringField(label="How many miles do you commute weekly in public transport (train, bus, etc.)or an e-bike? Please calculate all private journeys including the work commute, but not business travels." ,
                                                 widget=widgets.RadioSelect , 
                                                choices = [ ['lessA', '1 - 39 miles' ],
                                                ['AtoB',  '40 - 50 miles' ],
