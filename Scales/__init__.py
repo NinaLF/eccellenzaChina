@@ -178,52 +178,54 @@ class Player(BasePlayer):
         ['MultiplePerDay', '2 or more times per day'  ]] , label= 'Dairy products (e.g milk or cheese)' )
 
     # further behavior items
-    footprint_flying_short = models.IntegerField(min=0, max= 300, label = 'How many <b>short-distance flights (<3 hours)</b> did you take on average in the past two years? <i> i: one round-trip flight counts as two flights. So if you flew from San Francisco to Los Angeles and back this counts as 2 flights. </i> ' )
-    footprint_flying_mid = models.IntegerField(min=0, max= 300 , label ='How many <b>mid-distance flights (3-6 hours) </b> did you take on average in the past two years? <i> i: one round-trip flight counts as two flights. So if you flew from New York to San Francisco and back this counts as 2 flights. </i> ')
-    footprint_flying_long = models.IntegerField(min=0, max= 300, label= 'How many <b>long-distance flights (>6 hours) </b> did you take on average in the past two years? <i> i: one round-trip flight counts as two flights. So if you flew from Miami to London and back this counts as 2 flights. </i> ' )
+    footprint_flying_short = models.IntegerField(min=0, max= 300, label = "How many <b> short-distance flights (<3 hours)</b> did you take on average in the past two years? <i> i: one round-trip flight counts as two flights. So if you flew from San Francisco to Los Angeles and back this counts as 2 flights. </i> " )
+    footprint_flying_mid = models.IntegerField(min=0, max= 300 , label = "How many <b> mid-distance flights (3-6 hours) </b> did you take on average in the past two years? <i> i: one round-trip flight counts as two flights. So if you flew from New York to San Francisco and back this counts as 2 flights. </i> ")
+    footprint_flying_long = models.IntegerField(min=0, max= 300, label= "How many <b> long-distance flights (>6 hours) </b> did you take on average in the past two years? <i> i: one round-trip flight counts as two flights. So if you flew from Miami to London and back this counts as 2 flights. </i> " )
 
-    footprint_commute_car =  models.StringField(widget=widgets.RadioSelect,
+    footprint_commute_car =  models.StringField(label= "How many miles do you <b> annually drive in a car </b> or on a motorcycle (outside of work times, both driving and as a passenger)?", widget=widgets.RadioSelect,
                                                 choices = [['never' , ' I never use a car or motorcycle'],
                                                            ['less_than_A', '1 - 1,244 miles'], 
                                                            ['A_to_B',  '1,245 - 4,659 miles'],
                                                            ['B_to_C' ,'4,660 - 7,769 miles'],
                                                            ['C_to_D' , '7,770 - 18,640 miles'],
                                                            ['more_than_D',  'more than 18,640 miles']],
-                                                 label= 'How many kilometers do you <b> annually drive in a car </b> or on a motorcycle (outside of work times, both driving and as a passenger)?' )
+                                                  )
     
 
-    footprint_commute_car_type=  models.StringField(widget=widgets.RadioSelect ,
+    footprint_commute_car_type=  models.StringField( label = 'Which kind of fuel does your car operate on?', widget=widgets.RadioSelect ,
                                                     choices = [  ['none', 'I do not have a car' ],
                                                         ['Electric_green',  'Electric (green energy)'  ],
                                                         ['Eletric_conv', 'Electric (conventional energy) ' ],
                                                         ['Biogas', 'Biogas' ],
                                                         ['NaturalGas',  'Natural gas' ],
-                                                        ['Diesel', 'Gasoline/Diesel/Hybrid' ]],
-                                                    label = 'Which kind of fuel does your car operate on?')
-    footprint_commute_pt =  models.StringField(widget=widgets.RadioSelect , 
+                                                        ['Diesel', 'Gasoline/Diesel/Hybrid' ]]
+                                                   )
+    footprint_commute_pt =  models.StringField(label="How many miles do you <b> commute weekly in public transport </b> (train, bus, etc.)or an e-bike? Please calculate all private journeys including the work commute, but not business travels." ,
+                                                widget=widgets.RadioSelect , 
                                                choices = [ ['lessA', '1 - 39 miles' ],
                                                ['AtoB',  '40 - 50 miles' ],
                                                ['BtoC', '50 -149 miles'  ],
                                                ['CtoD', '150 - 224 miles' ],
                                                ['DtoE',  '225 - 370 miles' ],
-                                               ['most', 'more than 370 miles'  ] ],
-                                                    label='How many kilometers do you <b> commute weekly in public transport </b> (train, bus, etc.)or an e-bike? Please calculate all private journeys including the work commute, but not business travels.' )
+                                               ['most', 'more than 370 miles'  ] ] )
 
-    footprint_regional =  models.StringField(widget=widgets.RadioSelect ,
+    footprint_regional =  models.StringField(label = ' What percentage of your food is regional (from within your country or region, not imported) ? ', widget=widgets.RadioSelect ,
                                              choices = [  [ 'less_than' , 'Less than a quarter'],
                                                         ['quarter' , 'About a quarter'  ],
                                                         [  'half' , 'About half'  ],
                                                         [  'three_quarter' , 'About three quarters' ],
-                                                        [  'more_than' , 'the largest part is regional'] ],
-                                             label = ' What percentage of your food is regional (from within your country or region, not imported) ? '
+                                                        [  'more_than' , 'the largest part is regional'] ]
+                                             
                                              )
     
-    footprint_electricity =  models.StringField(widget=widgets.RadioSelect ,
+    footprint_electricity =  models.StringField( label = 'This question is about your electricity supply. What does your electricity supply look like?',
                                              choices = [  [ 'A' , 'I dont know'],
                                                         ['B',  ' I have a conventional (fossil) supply'] ,
                                                         ['C',  'I partly have green electricity (mixed)' ] ,
-                                                        ['D',  'I have green electricity entirely ' ] ], 
-                                                        label = 'This question is about your electricity supply. What does your electricity supply look like?'
+                                                        ['D',  'I have green electricity entirely ' ] 
+                                                        ], 
+                                                        widget=widgets.RadioSelect ,
+                                                       
                                                 )
 
     ## policy scales
