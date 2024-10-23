@@ -151,7 +151,7 @@ class ActiveSampling(Page):
     
 class ActiveSampling2(Page):
     form_model = "player"
-    form_fields= [ 'controlQuestion1', 'controlQuestion2' ]
+    form_fields= [ 'controlQuestion1', 'controlQuestion2', 'controlQuestion3' ]
   
     def is_displayed(self):
         return self.participant.group_assignment == "active"
@@ -227,7 +227,7 @@ class PassiveSampling2(Page):
     
 class PassiveSampling3(Page):
     form_model = "player"
-    form_fields= [ 'controlQuestion1' , 'controlQuestion2']
+    form_fields= [ 'controlQuestion1' , 'controlQuestion2', 'controlQuestion3']
     def is_displayed(self):
         return self.participant.group_assignment == "passive"
     
