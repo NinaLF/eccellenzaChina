@@ -3,21 +3,6 @@ import random
 from otree.api import *
 
 
-doc = """
-How to translate an app to multiple languages (e.g. English and German).
-
-There are 2 ways to define localizable strings:
-(1) Put it in a "lexicon" file (see lexicon_en.py, lexicon_de.py).
-    This is the easiest technique, and it allows you to easily reuse the same string multiple times.
-(2) If the string contains variables, then it should to be defined in the template.
-    Use an if-statement, like {{ if de }} Nein {{ else }} No {{ endif }}
-
-When you change the LANGUAGE_CODE in settings.py, the language will automatically be changed.
-
-Note: this technique does not require .po files, which are a more complex technique.    
-"""
-
-
 class C(BaseConstants):
     NAME_IN_URL = 'panel_study'
     NUM_ROUNDS = 1
@@ -29,151 +14,40 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     pass
 
-def creating_session(subsession:Subsession):
-    
-    if subsession.session.config['language'] == 'de':
-        from .lexicon_de import Lexicon
-        subsession.session.myLangCode = "_de"
-    elif subsession.session.config['language'] == 'zh_hans':
-        from .lexicon_zh_hans import Lexicon
-        subsession.session.myLangCode = "_ch"
-    else:
-        from .lexicon_en import Lexicon
-        subsession.session.myLangCode = "_en"
-    subsession.session.scalesLexi = Lexicon 
 
 
-#region many very redundant functions 
-def make_likert7():
-    return models.IntegerField(
-        choices=[1,2,3,4,5,6,7],
-            widget=widgets.RadioSelect,
-    )
-
+#region functions
 def make_likert10():
         return models.IntegerField(
             choices=[1,2,3,4,5,6,7,8,9,10],
             widget=widgets.RadioSelect,
+            label= 'label'
         )
-def make_likert11():
-        return models.IntegerField(
-            choices=[1,2,3,4,5,6,7,8,9,10, 22],
-            widget=widgets.RadioSelect,
-        )
+
 def make_likert9():
         return models.IntegerField(
             choices=[-1,0,1,2,3,4,5,6,7],
             widget=widgets.RadioSelect,
+            label= 'label'
         )
-def make_likert8():
-        return models.IntegerField(
-            choices=[1,2,3,4,5,6,7, 8],
-            widget=widgets.RadioSelect,
-        )
-def make_likert6():
-        return models.IntegerField(
-            choices=[1,2,3,4,5,6],
-            widget=widgets.RadioSelect,
-        )
+
 def make_likert5():
         return models.IntegerField(
             choices=[1,2,3,4,5],
             widget=widgets.RadioSelect,
+            label= 'label'
         )
 def make_likert4():
         return models.IntegerField(
             choices=[1,2,3,4],
             widget=widgets.RadioSelect,
+            label= 'label'
         )
+
 #endregion
 
 
 
-#region Knowledge Choices
-def cknow1_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-    ['a_false', Lexicon.know_1a],
-    ['b_true',  Lexicon.know_1b],
-    ['c_false', Lexicon.know_1c],
-    ['dk',  Lexicon.dont_know]
-]
-
-def cknow2_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-    ['a_false', Lexicon.know_2a],
-    ['b_false',  Lexicon.know_2b],
-    ['c_true', Lexicon.know_2c],
-    ['dk',  Lexicon.dont_know]
-]
-
-def cknow3_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-    ['a_true', Lexicon.know_3a],
-    ['b_false',  Lexicon.know_3b],
-    ['c_false', Lexicon.know_3c],
-    ['dk',  Lexicon.dont_know]
-]
-
-def cknow4_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-    ['a_false', Lexicon.know_4a],
-    ['b_true',  Lexicon.know_4b],
-    ['c_false', Lexicon.know_4c],
-    ['dk',  Lexicon.dont_know]
-]
-
-def cknow5_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-    ['a_false', Lexicon.know_5a],
-    ['b_true',  Lexicon.know_5b],
-    ['c_false', Lexicon.know_5c],
-    ['dk',  Lexicon.dont_know]
-]
-
-def cknow6_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-    ['a_false', Lexicon.know_6a],
-    ['b_false',  Lexicon.know_6b],
-    ['c_true', Lexicon.know_6c],
-    ['dk',  Lexicon.dont_know]
-]
-
-def cknow7_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-    ['a_false', Lexicon.know_7a],
-    ['b_false',  Lexicon.know_7b],
-    ['c_true', Lexicon.know_7c],
-    ['d_false', Lexicon.know_7d],
-
-    ['dk',  Lexicon.dont_know]
-]
-
-def cknow8_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-    ['a_true', Lexicon.know_8a],
-    ['b_false',  Lexicon.know_8b],
-    ['c_false', Lexicon.know_8c],
-    ['d_false',  Lexicon.know_8d],
-    ['dk',  Lexicon.dont_know]
-]
-
-def cknow9_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-    ['a_false', Lexicon.know_9a],
-    ['b_true',  Lexicon.know_9b],
-    ['c_false', Lexicon.know_9c],
-    ['d_false',  Lexicon.know_9d],
-    ['dk',  Lexicon.dont_know],
-]
 #endregion
 def make_likert_n(n):
     nchoices = list(range(1, n+1))
@@ -182,215 +56,18 @@ def make_likert_n(n):
         widget=widgets.RadioSelect,
 )
 
-def food_frequencies(player):
-    Lexicon = player.session.scalesLexi
-    return [
-        ['never', Lexicon.food_overall_A],
-        ['oncePerMonth',  Lexicon.food_overall_B],
-        ['2-3PerMonth', Lexicon.food_overall_C],
-        ['oncePerWeek',  Lexicon.food_overall_D],
-        ['2-3PerWeek',  Lexicon.food_overall_E],
-        ['4-6PerWeek', Lexicon.food_overall_F],
-        ['oncePerDay',  Lexicon.food_overall_G],
-        ['MultiplePerDay',  Lexicon.food_overall_H]
-]
 
-def footprint_food_overall1_choices(player):
-    return(food_frequencies(player))
-
-def footprint_food_overall2_choices(player):
-    return(food_frequencies(player))
-
-def footprint_food_overall3_choices(player):
-    return(food_frequencies(player))
-
-def footprint_food_overall4_choices(player):
-    return(food_frequencies(player))
-
-def footprint_food_overall5_choices(player):
-    return(food_frequencies(player))
-
-
-def footprint_commute_car_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-        ['never', Lexicon.commute_car_never],
-        ['lessA',  Lexicon.commute_car_less_than_A],
-        ['AtoB', Lexicon.commute_car_A_to_B],
-        ['BtoC',  Lexicon.commute_car_B_to_C],
-        ['CtoD',  Lexicon.commute_car_C_to_D],
-        ['most', Lexicon.commute_car_more_than_D]
-]
-
-
-def footprint_commute_car_type_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-        ['none', Lexicon.commute_car_type_none],
-        ['Electric_green', Lexicon.commute_car_type_A],
-        ['Eletric_conv', Lexicon.commute_car_type_B],
-        ['Biogas', Lexicon.commute_car_type_C],
-        ['NaturalGas', Lexicon.commute_car_type_D],
-        ['Diesel', Lexicon.commute_car_type_E]
-]
-
-def footprint_commute_pt_choices(player):
-    Lexicon = player.session.scalesLexi
-    return [
-        ['lessA', Lexicon.commute_pt_less_than_A],
-        ['AtoB', Lexicon.commute_pt_A_to_B],
-        ['BtoC', Lexicon.commute_pt_B_to_C],
-        ['CtoD', Lexicon.commute_pt_C_to_D],
-        ['DtoE', Lexicon.commute_pt_D_to_E],
-        ['most', Lexicon.commute_pt_more_than_E]
-]
-     
-
-#region demographics
-## residential area
-def residential_area_choices(player):
-    residential_area_choices = []
-    Lexicon = player.session.scalesLexi
-    language_code = player.session.config['language']
-    if language_code == 'de':
-        residential_area_choices = [
-            ["metropolitan", Lexicon.metropolitan_area],
-            ["suburban", Lexicon.suburban],
-            ["rural", Lexicon.rural]
-        ]
-    elif language_code == 'zh_hans':
-        residential_area_choices = [
-        ]
-    else:
-        residential_area_choices = [
-            ["metropolitan", Lexicon.metropolitan_area],
-            ["suburban", Lexicon.suburban],
-            ["rural", Lexicon.rural]
-        ]
-    return residential_area_choices
-
-# def states / provinces
-def states_choices(player):
-    Lexicon = player.session.scalesLexi
-    language_code =  player.session.config['language']
-    states_choices = []
-    if language_code == 'de':
-        states_choices = [    
-            ["Baden-Württemberg" , Lexicon.BW],
-            ["Bayern" , Lexicon.Bayern],
-            ["Berlin" , Lexicon.Berlin],
-            ["Brandenburg" , Lexicon.Brandenburg],
-            ["Bremen" , Lexicon.Bremen],
-            ["Hamburg" , Lexicon.Hamburg],
-            ["Hessen" , Lexicon.Hessen],
-            ["MecklenburgVorpommern" , Lexicon.MV],
-            ["Niedersachsen" , Lexicon.Niedersachsen],
-            ["NordrheinWestfalen" , Lexicon.NRW],
-            ["RheinlandPfalz" , Lexicon.RP],
-            ["Saarland" , Lexicon.Saarland],
-            ["Sachsen" , Lexicon.Sachsen],
-            ["SachsenAnhalt" , Lexicon.SA],
-            ["SchleswigHolstein" , Lexicon.SH],
-            ["Thüringen" , Lexicon.Thueringen]
-        ]
-
-    elif language_code == "zh_hans":
-        states_choices = [    
-            ["Anhui" , Lexicon.Anhui],
-            ["Peking" , Lexicon.Peking],
-            ["Chongqing" , Lexicon.Chongqing],
-            ["Fujian" , Lexicon.Fujian],
-            ["Guangdong" , Lexicon.Guangdong],
-            ["Guangxi" , Lexicon.Guangxi],
-            ["Gansu" , Lexicon.Gansu],
-            ["Guizhou" , Lexicon.Guizhou],
-            ["Henan" , Lexicon.Henan],
-            ["Hebei" , Lexicon.Hebei],
-            ["Hunan" , Lexicon.Hunan],
-            ["Hubei" , Lexicon.Hubei],
-            ["Hainan" , Lexicon.Hainan],
-            ["Heilongjiang" , Lexicon.Heilongjiang],
-            ["Jilin" , Lexicon.Jilin],
-            ["Jiangsu" , Lexicon.Jiangsu],
-            ["Jiangxi" , Lexicon.Jiangxi],
-            ["Liaoning" , Lexicon.Liaoning],
-            ["InnereMongolei" , Lexicon.InnereMongolei],
-            ["Ningxia" , Lexicon.Ningxia],
-            ["Qinghai" , Lexicon.Qinghai],
-            ["Sichuan" , Lexicon.Sichuan],
-            ["Shandong" , Lexicon.Shandong],
-            ["Shanxi" , Lexicon.Shanxi],
-            ["Shannxi" , Lexicon.Shannxi],
-            ["Schanghai" , Lexicon.Schanghai],
-            ["Tianjin" , Lexicon.Tianjin],
-            ["Xinjiang" , Lexicon.Xinjiang],
-            ["Tibet" , Lexicon.Tibet],
-            ["Yunnan" , Lexicon.Yunnan],
-            ["Zhejiang" , Lexicon.Zhejiang],
-            ["Hongkong" , Lexicon.Hongkong],
-            ["Taiwan" , Lexicon.Taiwan],
-            ["Macao" , Lexicon.Macao]
-        ]
-   
-    else: 
-        states_choices = [            
-            ["Alabama" , Lexicon.Alabama],
-            ["Alaska" , Lexicon.Alaska],
-            ["Arizona" , Lexicon.Arizona],
-            ["Arkansas" , Lexicon.Arkansas],
-            ["California" , Lexicon.California],
-            ["Colorado" , Lexicon.Colorado],
-            ["Connecticut" , Lexicon.Connecticut],
-            ["Delaware" , Lexicon.Delaware],
-            ["Florida" , Lexicon.Florida],
-            ["Georgia" , Lexicon.Georgia],
-            ["Hawaii" , Lexicon.Hawaii],
-            ["Idaho" , Lexicon.Idaho],
-            ["Illinois" , Lexicon.Illinois],
-            ["Indiana" , Lexicon.Indiana],
-            ["Iowa" , Lexicon.Iowa],
-            ["Kansas" , Lexicon.Kansas],
-            ["Kentucky" , Lexicon.Kentucky],
-            ["Louisiana" , Lexicon.Louisiana],
-            ["Maine" , Lexicon.Maine],
-            ["Maryland" , Lexicon.Maryland],
-            ["Massachusetts" , Lexicon.Massachusetts],
-            ["Michigan" , Lexicon.Michigan],
-            ["Minnesota" , Lexicon.Minnesota],
-            ["Mississippi" , Lexicon.Mississippi],
-            ["Missouri" , Lexicon.Missouri],
-            ["Montana" , Lexicon.Montana],
-            ["Nebraska" , Lexicon.Nebraska],
-            ["Nevada" , Lexicon.Nevada],
-            ["NewHampshire" , Lexicon.NewHampshire],
-            ["NewJersey" , Lexicon.NewJersey],
-            ["NewMexico" , Lexicon.NewMexico],
-            ["NewYork" , Lexicon.NewYork],
-            ["NorthCarolina" , Lexicon.NorthCarolina],
-            ["NorthDakota" , Lexicon.NorthDakota],
-            ["Ohio" , Lexicon.Ohio],
-            ["Oklahoma" , Lexicon.Oklahoma],
-            ["Oregon" , Lexicon.Oregon],
-            ["Pennsylvania" , Lexicon.Pennsylvania],
-            ["RhodeIsland" , Lexicon.RhodeIsland],
-            ["SouthCarolina" , Lexicon.SouthCarolina],
-            ["SouthDakota" , Lexicon.SouthDakota],
-            ["Tennessee" , Lexicon.Tennessee],
-            ["Texas" , Lexicon.Texas],
-            ["Utah" , Lexicon.Utah],
-            ["Vermont" , Lexicon.Vermont],
-            ["Virginia" , Lexicon.Virginia],
-            ["Washington" , Lexicon.Washington],
-            ["WestVirginia" , Lexicon.WestVirginia],
-            ["Wisconsin" , Lexicon.Wisconsin],
-            ["Wyoming" , Lexicon.Wyoming]
-            
-        ]
-    return states_choices
-
-#endregion
 
 class Player(BasePlayer):
+
+    def make_field(label):
+        return models.IntegerField(
+        choices=[['10', 'Agree completely (10)'], ['9', '9'],['8', '8'],['7', '7'],
+                 ['6', '6'], ['5', '5'], ['4', '4'], 
+                 ['3', '3'], ['2', '2'], ['1', 'Completely disagree (1)'] ],                                
+        label=label,
+        widget=widgets.RadioSelectHorizontal,
+    )
     ### Climate Change Concern Scale by Tobler et al. 2012
   
     ### Climate Change Emotions Scale based on Knauf 2022 and Truelove 2012
@@ -413,17 +90,7 @@ class Player(BasePlayer):
     emoConcern2 = make_likert10() ## concern
     emoConcern3 = make_likert10() ## concern
 
-    # new knowledge questions Allianz
-    cknow1 = models.StringField( choices=["a_false", "b_true", "c_false", "dk"], widget=widgets.RadioSelect)
-    cknow2 = models.StringField(choices=["a_false", "b_false", "c_true", "dk"], widget=widgets.RadioSelect)
-    cknow3 = models.StringField(choices=["a_true", "b_false", "c_false", "dk"], widget=widgets.RadioSelect,)
-    cknow4 = models.StringField(choices=["a_false", "b_true", "c_false", "dk"], widget=widgets.RadioSelect,)  
-    cknow5 = models.StringField(choices=["a_false", "b_true", "c_false", "dk"], widget=widgets.RadioSelect,)     
-    cknow6 = models.StringField(choices=["a_false", "b_false", "c_true", "dk"], widget=widgets.RadioSelect,) 
-    cknow7 = models.StringField(choices=["a_false", "b_false", "c_true","d_false", "dk"], widget=widgets.RadioSelect,)     
-    cknow8 = models.StringField(choices=["a_true", "b_false", "c_false", "d_false", "dk"], widget=widgets.RadioSelect,)     
-    cknow9 = models.StringField(choices=["a_false", "b_true", "c_false", "d_false", "dk"], widget=widgets.RadioSelect,)
-
+    
     
     ### IB Values
     ibv1 = make_likert9()
@@ -436,10 +103,9 @@ class Player(BasePlayer):
     pit1 = make_likert10()
     pit2 = make_likert10()
 
-   
 
     ### Belief
-    belief1Happening= make_likert_n(6)
+    belief1Happening= make_likert_n(10)
 
     beliefHuman1 = make_likert_n(10)
     beliefHuman2 = make_likert_n(10)
@@ -448,276 +114,267 @@ class Player(BasePlayer):
     beliefConseqences1 = make_likert_n(10)
     beliefConseqences2 = make_likert_n(10)
     beliefConseqences3 = make_likert_n(10)
-    beliefConseqences4 = make_likert_n(10)
 
-    belief1Solutions = make_likert10()
-    belief2Solutions = make_likert10()
-    belief3Solutions = make_likert10()
-    belief4Solutions = make_likert10()
-    belief5Solutions = make_likert10()
-
-    beliefConsensus = models.IntegerField(min=0,max = 100)
 
     ## behaviors
 
 
-    footprint_food_overall1 =  models.StringField(widget=widgets.RadioSelect )
-    footprint_food_overall2 =  models.StringField(widget=widgets.RadioSelect )
-    footprint_food_overall3 =  models.StringField(widget=widgets.RadioSelect )
-    footprint_food_overall4 =  models.StringField(widget=widgets.RadioSelect )
-    footprint_food_overall5 =  models.StringField(widget=widgets.RadioSelect )
+    footprint_food_overall1 =  models.StringField(widget=widgets.RadioSelect , 
+                                                  choices = [
+        ['never', 'Never'],
+        ['oncePerMonth', 'Once a month' ],
+        ['2-3PerMonth',  '2-3 times per month'],
+        ['oncePerWeek',  'Once a week' ],
+        ['2-3PerWeek', '2-3 times per week' ],
+        ['4-6PerWeek',  '4-6 times per week' ],
+        ['oncePerDay',  'Once a day'  ],
+        ['MultiplePerDay', '2 or more times per day'  ]] , label='Beef')
+    
+    footprint_food_overall2 =  models.StringField(widget=widgets.RadioSelect,
+                                                    choices = [
+        ['never', 'Never'],
+        ['oncePerMonth', 'Once a month' ],
+        ['2-3PerMonth',  '2-3 times per month'],
+        ['oncePerWeek',  'Once a week' ],
+        ['2-3PerWeek', '2-3 times per week' ],
+        ['4-6PerWeek',  '4-6 times per week' ],
+        ['oncePerDay',  'Once a day'  ],
+        ['MultiplePerDay', '2 or more times per day'  ]] , label = 'Lamb or mutton' )
+    footprint_food_overall3 =  models.StringField(widget=widgets.RadioSelect ,   choices = [
+        ['never', 'Never'],
+        ['oncePerMonth', 'Once a month' ],
+        ['2-3PerMonth',  '2-3 times per month'],
+        ['oncePerWeek',  'Once a week' ],
+        ['2-3PerWeek', '2-3 times per week' ],
+        ['4-6PerWeek',  '4-6 times per week' ],
+        ['oncePerDay',  'Once a day'  ],
+        ['MultiplePerDay', '2 or more times per day'  ]] , label= 'Pork')
+    footprint_food_overall4 =  models.StringField(widget=widgets.RadioSelect ,   choices = [
+        ['never', 'Never'],
+        ['oncePerMonth', 'Once a month' ],
+        ['2-3PerMonth',  '2-3 times per month'],
+        ['oncePerWeek',  'Once a week' ],
+        ['2-3PerWeek', '2-3 times per week' ],
+        ['4-6PerWeek',  '4-6 times per week' ],
+        ['oncePerDay',  'Once a day'  ],
+        ['MultiplePerDay', '2 or more times per day'  ]] , label= 'Poultry (e.g. chicken)')
+    footprint_food_overall5 =  models.StringField(widget=widgets.RadioSelect ,  choices = [
+        ['never', 'Never'],
+        ['oncePerMonth', 'Once a month' ],
+        ['2-3PerMonth',  '2-3 times per month'],
+        ['oncePerWeek',  'Once a week' ],
+        ['2-3PerWeek', '2-3 times per week' ],
+        ['4-6PerWeek',  '4-6 times per week' ],
+        ['oncePerDay',  'Once a day'  ],
+        ['MultiplePerDay', '2 or more times per day'  ] ] , label= 'Fish')
+    footprint_food_overall6 =  models.StringField(widget=widgets.RadioSelect ,  choices = [
+        ['never', 'Never'],
+        ['oncePerMonth', 'Once a month' ],
+        ['2-3PerMonth',  '2-3 times per month'],
+        ['oncePerWeek',  'Once a week' ],
+        ['2-3PerWeek', '2-3 times per week' ],
+        ['4-6PerWeek',  '4-6 times per week' ],
+        ['oncePerDay',  'Once a day'  ],
+        ['MultiplePerDay', '2 or more times per day'  ]] , label= 'Dairy products (e.g milk or cheese)' )
+
     # further behavior items
-    footprint_flying_short = models.IntegerField(min=0, max= 300 )
-    footprint_flying_mid = models.IntegerField(min=0, max= 300)
-    footprint_flying_long = models.IntegerField(min=0, max= 300)
+    footprint_flying_short = models.IntegerField(min=0, max= 300, 
+                                                 label = "How many <b> short-distance flights (<3 hours)</b> did you take on average in the past two years? <i> i: one round-trip flight counts as two flights. So if you flew from San Francisco to Los Angeles and back this counts as 2 flights. </i> " )
+    footprint_flying_mid = models.IntegerField(min=0, max= 300 , 
+                                               label = "How many <b> mid-distance flights (3-6 hours) </b> did you take on average in the past two years? <i> i: one round-trip flight counts as two flights. So if you flew from New York to San Francisco and back this counts as 2 flights. </i> ")
+    footprint_flying_long = models.IntegerField(min=0, max= 300,
+                                                 label= "How many <b> long-distance flights (>6 hours) </b> did you take on average in the past two years? <i> i: one round-trip flight counts as two flights. So if you flew from Miami to London and back this counts as 2 flights. </i> " )
 
-    footprint_commute_car =  models.StringField(widget=widgets.RadioSelect )
-    footprint_commute_car_type=  models.StringField(widget=widgets.RadioSelect )
-    footprint_commute_pt =  models.StringField(widget=widgets.RadioSelect )
+    footprint_commute_car =  models.IntegerField( min=0, max=200 , 
+                                                 label= "How many miles by car did you commute on a typical working day in the past 2 weeks (as a driver or passenger)? <br> Please enter the average miles <b> per working day </b>")
+                                               
+                                                
+    
 
-    footprint_regional =  make_likert5()
-    footprint_electricity =  make_likert4()
+    footprint_commute_car_type=  models.StringField( label = 'Which kind of fuel does your car operate on?', widget=widgets.RadioSelectHorizontal ,
+                                                    choices = [  ['none', 'I do not have a car' ],
+                                                        ['Electric_green',  'Electric (green energy)'  ],
+                                                        ['Eletric_conv', 'Electric (conventional energy) ' ],
+                                                        ['Biogas', 'Biogas' ],
+                                                        ['NaturalGas',  'Natural gas' ],
+                                                        ['Diesel', 'Gasoline/Diesel/Hybrid' ]]
+                                                   )
+    footprint_commute_pt =  models.StringField(label="How many miles did you commute per week in the past 2 weeks using public transport (train, bus, etc.) or an e-bike? Please calculate all private journeys including the work commute, but not business travels <b>based on one week.</b>" ,
+                                                widget=widgets.RadioSelectHorizontal, 
+                                               choices = [ ['lessA', '1 - 39 miles' ],
+                                               ['AtoB',  '40 - 50 miles' ],
+                                               ['BtoC', '50 -149 miles'  ],
+                                               ['CtoD', '150 - 224 miles' ],
+                                               ['DtoE',  '225 - 370 miles' ],
+                                               ['most', 'more than 370 miles'  ] ] )
 
+    footprint_regional =  models.StringField(label = ' What percentage of your food is regional (from within your country or region, not imported) ? ', widget=widgets.RadioSelectHorizontal ,
+                                             choices = [  
+                                                  [ 'less_than' , 'Less than a quarter'],
+                                                        ['quarter' , 'About a quarter'  ],
+                                                        [  'half' , 'About half'  ],
+                                                        [  'three_quarter' , 'About three quarters' ],
+                                                        [  'more_than' , 'the largest part is regional'] ]
+                                             
+                                             )
+    
+    footprint_electricity =  models.StringField( label = 'This question is about your electricity supply. What does your electricity supply look like?',
+                                             choices = [  [ 'A' , 'I dont know'],
+                                                        ['B',  ' I have a conventional (fossil) supply'] ,
+                                                        ['C',  'I partly have green electricity (mixed)' ] ,
+                                                        ['D',  'I have green electricity entirely ' ] 
+                                                        ], 
+                                                        widget=widgets.RadioSelectHorizontal ,
+                                                       
+                                                )
+
+    footprint_laundry1 =  models.IntegerField( min=0, max=10 , 
+                                                 label= "How often did you on average dry your laundry in the dryer in the past 4 weeks? <br> Please enter the average amount of times <b> per week </b>")
+    footprint_laundry2 =  models.IntegerField( min=0, max=10 , 
+                                                 label= "How often did you on average dry your laundry by air drying it the past 4 weeks? <br> Please enter the average amount of times <b> per week </b>")
     ## policy scales
-    policy_commute = make_likert10()
-    policy_flying = make_likert10()
-    policy_electricity = make_likert10()
-    policy_diet = make_likert10()
-    policy_recycling = make_likert10()
-    policy_regional = make_likert10()
-
-
-    ### Demographics
+    policy_commute = make_field('Increase or introduce taxes on fuel for vehicles (i.e. diesel and gasoline)')
+    policy_flying = make_field('Increase or introduce taxes on air travel.')
+    policy_electricity = make_field('Increase or introduce taxes on fossil fuels as energy source (i.e. gas, oil, and coal)')  
+    policy_diet = make_field('Increase or introduce taxes on red meat (e.g., beef, lamb, veal).')
+    policy_recycling = make_field( 	'Increase or introduce taxes on non-recyclable materials')
+    policy_regional = make_field('Increase or introduce taxes on food products imported via plane')
     
-    householdsize = models.IntegerField(min=1,max = 20) 
 
-    residential_area = models.StringField()
-    zip_code = models.StringField(blank=True)
-    block_order = models.IntegerField()
-    #party_affiliation = models.StringField(choices=get_party_choices(LANGUAGE_CODE, Lexicon) )
-    states = models.StringField()
+ # demographics
+    age = models.IntegerField(label='How old are you', min=18, max=90)
+    
+    gender = models.StringField( label='How do you identify?',
+        choices=[['Male', 'Male'], ['Female', 'Female'], 
+        ['prefer not to answer/ diverse', 'prefer not to answer/ diverse']],
+        widget = widgets.RadioSelect
+    )
+    education = models.StringField( label='What is your <b>highest education</b>?',
+        choices=[['No formal education', 'No formal education'],
+                ['Compulsory education', 'Compulsory education (secondary school)'], 
+                 ['Further education', 'Further education'],
+                 ['Higher education (Bachelor, Master, PhD)', 'Higher education (Bachelor, Master, PhD)']],
+                 widget = widgets.RadioSelect
+    )
+
+    income = models.StringField(
+                                label='How high is your <b>yearly personal income before tax </b>?',
+        choices=[['< 18.000£', '< 18.000£'],
+                 ['18.000£ to 23.000£', '18.000£ to 23.000£'], 
+                 ['23.001£ to 30.500£', '23.001£ to 30.500£'], 
+                 ['30.501£ to 45.000£', '30.500£ to 45.000£'], 
+                 ['> 45.001£', '> 45.001£']],
+                  widget = widgets.RadioSelect
+    )
+    polOrientation =  models.IntegerField( widget=widgets.RadioSelect,  
+                                          choices=[['1', 'extremely left (1)'], ['2', '2'], ['3', '3'],['4', '4'], ['5', '5'], ['6', '6'], ['7', '7'],['8', '8'], ['9', '9'],  ['10', 'extremely right (10)'] ] ) 
+
+    climate_change_concern1 = make_field('I worry about the climate´s state.')
+    climate_change_concern2 = make_field('Climate protection is important for our future.')
+    climate_change_concern3 = make_field('We must protect the climate´s delicate equilibrium.')
+    climate_change_concern4 = make_field('Climate change has severe consequences for humans and nature.')
+    
+
+    nfc_1 = make_field('I would prefer complex to simple problem')
+    nfc_2 = make_field('I like to have the responsibility of handling a situation that requires a lot of thinking')
+    nfc_3 = make_field('Thinking is not my idea of fun.') # reverse coded
+    nfc_4 = make_field('I would rather do something that requires little thought than something that is sure to challenge my thinking abilities.') # reverse coded
+    nfc_5 = make_field('I really enjoy a task that involves coming up with new solutions to problems.')
+    nfc_6 = make_field('I would prefer a task that is intellectual, difficult, and important to one that is somewhat important but does not require much thought')
+
+    numeracy1 = models.IntegerField(min=0, max=100)
+
+
+    UnitUnderstanding =  models.IntegerField( widget=widgets.RadioSelect,  label="How much difficulty did you have understanding and imagining 'kg' ",
+                                          choices=[['1', 'no problem with the unit (1)'], ['2', '2'], ['3', '3'],['4', '4'], ['5', '5'], ['6', '6'], ['7', '7'],['8', '8'], ['9', '9'],  ['10', ' lots of difficulty (10)'] ] ) 
 
     
+   
+
+# < 18.000£          > 45.001£ 18.000£ to 23.000£ 23.001£ to 30.500£ 30.501£ to 45.000£     
 
 class Belief(Page):
     form_model = 'player'
-    form_fields= [ 'belief1Happening' , 'beliefConsensus' ]
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(Lexicon=player.session.scalesLexi)
-    @staticmethod
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        return dict(
-        form_fields= [ 'belief1Happening' , 'beliefConsensus'  ],
-        form_field_labels = [Lexicon.belief1HappeningLabel , Lexicon.beliefConsensLabel ]
-    )
+    form_fields= [ 'belief1Happening' ]
 
 class Belief1(Page):
      form_model = 'player'
      form_fields= [ 'beliefHuman1', 'beliefHuman2', 'beliefHuman3',
                    'beliefConseqences1', 'beliefConseqences2', 'beliefConseqences3']
-     @staticmethod
-     def vars_for_template(player: Player):
-         return dict(Lexicon=player.session.scalesLexi)
-     @staticmethod
-     def js_vars(player):
-         Lexicon = player.session.scalesLexi
-         return dict(
-         form_fields= [ 'beliefHuman1','beliefHuman2', 'beliefHuman3',
-                   'beliefConseqences1', 'beliefConseqences2', 'beliefConseqences3'],
-         form_field_labels = [ Lexicon.beliefHuman1Label, Lexicon.beliefHuman2Label, Lexicon.beliefHuman3Label, 
-                              Lexicon.beliefConseqences1Label, Lexicon.beliefConseqences2Label, Lexicon.beliefConseqences3Label ]
-     )
 
-class Belief2 (Page):
+class ClimateConcern(Page):
     form_model = 'player'
-    form_fields= [ 'belief1Solutions','belief2Solutions', 'belief3Solutions', 'belief4Solutions', 'belief5Solutions']
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(Lexicon=player.session.scalesLexi)
-    @staticmethod
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        return dict(
-        form_fields= [ 'belief1Solutions','belief2Solutions', 'belief3Solutions', 'belief4Solutions', 'belief5Solutions' ],
-        form_field_labels = [Lexicon.beliefSolutions1Label, Lexicon.beliefSolutions2Label, Lexicon.beliefSolutions3Label,
-                              Lexicon.beliefSolutions4Label, Lexicon.beliefSolutions5Label ]
-    )
+    form_fields = ['climate_change_concern1', 'climate_change_concern2', 'climate_change_concern3', 'climate_change_concern4']
+
 
 class CCEmotion(Page):
     form_model = 'player'
     form_fields= ['emoAng1', 'emoAng2', 'emoAng3', 'emoSad1','emoSad2', 'emoSad3', 'emoFear1', 'emoFear2', 'emoFear3', 'emoHope1', 'emoHope2', 'emoHope3', 'emoGuilt1', 'emoGuilt2', 'emoGuilt3', 'emoConcern1', 'emoConcern2', 'emoConcern3']
-    @staticmethod
-    def vars_for_template(player: Player):
-        return{
-            'Lexicon': player.session.scalesLexi
-        } 
-    @staticmethod
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        return dict(
-        form_fields = ['emoAng1', 'emoAng2', 'emoAng3', 'emoSad1','emoSad2', 'emoSad3', 'emoFear1', 'emoFear2', 'emoFear3',
-                        'emoHope1', 'emoHope2', 'emoHope3', 'emoGuilt1', 'emoGuilt2', 'emoGuilt3', 'emoConcern1', 'emoConcern2', 'emoConcern3'],
-        form_field_labels = [Lexicon.emoAng1Label, Lexicon.emoAng2Label , Lexicon.emoAng3Label, Lexicon.emoSad1Label,Lexicon.emoSad2Label, Lexicon.emoSad3Label,  Lexicon.emoFear1Label , Lexicon.emoFear2Label , Lexicon.emoFear3Label,
-                            Lexicon.emoHope1Label , Lexicon.emoHope2Label , Lexicon.emoHope3Label , Lexicon.emoGuilt1Label, Lexicon.emoGuilt2Label, Lexicon.emoGuilt3Label, Lexicon.emoConcern1Label, Lexicon.emoConcern2Label, Lexicon.emoConcern3Label]
-    )
-    
-class CCKnowledge(Page):
-    form_model = 'player'
-    form_fields= ['cknow1', 'cknow2', 'cknow3', 'cknow4', 'cknow5', 'cknow6','cknow7','cknow8', 'cknow9']
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(Lexicon=player.session.scalesLexi)
-    @staticmethod
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        return dict(
-        form_fields= ['cknow1', 'cknow2', 'cknow3', 'cknow4', 'cknow5', 'cknow6','cknow7','cknow8', 'cknow9'],
-        form_field_labels = [Lexicon.know_1qu, Lexicon.know_2qu, Lexicon.know_3qu, Lexicon.know_4qu, Lexicon.know_5qu, Lexicon.know_6qu,  Lexicon.know_7qu, Lexicon.know_8qu, Lexicon.know_9qu]
-    )
+  
     
 class BehaviorsFood(Page):
     form_model = 'player'
-    form_fields= ['footprint_food_overall1', 'footprint_food_overall2', 'footprint_food_overall3', 'footprint_food_overall4', 'footprint_food_overall5']
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(Lexicon=player.session.scalesLexi)
-    @staticmethod
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        return dict(
-        form_fields=  ['footprint_food_overall1', 'footprint_food_overall2', 'footprint_food_overall3', 'footprint_food_overall4', 'footprint_food_overall5' ], 
-        form_field_labels = [Lexicon.food_overall_label1, Lexicon.food_overall_label2, Lexicon.food_overall_label3, Lexicon.food_overall_label4, Lexicon.food_overall_label5  ]
-    )
+    form_fields= ['footprint_food_overall1', 'footprint_food_overall2', 'footprint_food_overall3', 'footprint_food_overall4', 'footprint_food_overall5', 'footprint_food_overall6']
+    
 class BehaviorsFood2(Page):
     form_model = 'player'
     form_fields= [ 'footprint_regional', 'footprint_electricity']
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(Lexicon=player.session.scalesLexi)
-    @staticmethod
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        return dict(
-        form_fields=  [ 'footprint_regional', 'footprint_electricity'], 
-        form_field_labels = [ Lexicon.regional_label, Lexicon.electricity_label ]
-    )
+    
 class BehaviorsTransport(Page):
     form_model = 'player'
     form_fields= ['footprint_commute_car', 'footprint_commute_car_type', 'footprint_commute_pt']
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(Lexicon=player.session.scalesLexi)
-    @staticmethod
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        return dict(
-        form_fields=  ['footprint_commute_car', 'footprint_commute_car_type', 'footprint_commute_pt' ], 
-        form_field_labels = [Lexicon.commute_car_label, Lexicon.commute_car_type_label, Lexicon.commute_pt_label ]
-    )
+    
 
+class BehaviorLaundry(Page):
+    form_model = 'player'
+    form_fields= ['footprint_laundry1', 'footprint_laundry2'] 
+     
 class BehaviorsFlying(Page):
     form_model = 'player'
     form_fields= [ 'footprint_flying_short', 'footprint_flying_mid', 'footprint_flying_long']
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(Lexicon=player.session.scalesLexi)
-    @staticmethod
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        return dict(
-        form_fields=  [ 'footprint_flying_short', 'footprint_flying_mid', 'footprint_flying_long'], 
-        form_field_labels = [  Lexicon.flying_short_label, Lexicon.flying_mid_label, Lexicon.flying_long_label ]
-    )
-
+   
 
 class IBValues(Page):
     form_model = 'player'
     form_fields= ['ibv1', 'ibv2', 'ibv3', 'ibv4']
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(Lexicon=player.session.scalesLexi)
-    @staticmethod
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        return dict(
-        form_fields= ['ibv1', 'ibv2', 'ibv3', 'ibv4'],
-        form_field_labels = [Lexicon.ibv1Label, Lexicon.ibv2Label , Lexicon.ibv3Label, Lexicon.ibv4Label]
-    )
-        
+    
 class PITrust(Page):
     form_model = 'player'
     form_fields= ['pit1', 'pit2']
-    @staticmethod
 
-    def vars_for_template(player: Player):
-        return dict(Lexicon=player.session.scalesLexi)
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        return dict(
-        form_fields = ['pit1', 'pit2' ],
-        form_field_labels = [Lexicon.pit1Label, Lexicon.pit2Label]
-    )
-        
+class NFC(Page):
+    form_model = 'player'
+    form_fields= ['nfc_1', 'nfc_2', 'nfc_3', 'nfc_4', 'nfc_5', 'nfc_6' ]
+
+class Numeracy(Page):
+    form_model = 'player'
+    form_fields= ['numeracy1']
+   
+   
 class policyScales(Page):
     form_model = 'player'
     form_fields= ['policy_commute', 'policy_flying', 'policy_electricity', 'policy_diet', 'policy_recycling', 'policy_regional' ]
-    @staticmethod
-
-    def vars_for_template(player: Player):
-        return dict(Lexicon=player.session.scalesLexi)
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        return dict(
-        form_fields = ['policy_commute', 'policy_flying', 'policy_electricity', 'policy_diet', 'policy_recycling', 'policy_regional' ],
-        form_field_labels = [Lexicon.policy1Label, Lexicon.policy2Label, Lexicon.policy3Label, Lexicon.policy4Label, Lexicon.policy5Label, Lexicon.policy6Label  ]
-    )
-
-class DemographicsEnd(Page):
-    @staticmethod
-    def get_form_fields(player):
-        if player.session.config['language'] == "de":
-            return [ 'householdsize', 'residential_area', 'zip_code', 'states' ]
-        else:
-            return [ 'householdsize', 'zip_code', 'states' ]
+   
+class unit(Page):
     form_model = 'player'
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(Lexicon=player.session.scalesLexi)
-    @staticmethod
-    def js_vars(player):
-        Lexicon = player.session.scalesLexi
-        if  player.session.config['language'] == "de":
-            return dict(
-            form_fields= [ 'householdsize', 'residential_area', 'zip_code', 'states' ], 
-            form_field_labels = [Lexicon.householdsize_label,Lexicon.residential_area_label , Lexicon.zip_code_label , Lexicon.states_label],
-            langcode= "de")
-        else:
-            return dict(
-            form_fields= [ 'householdsize', 'zip_code', 'states' ],
-            form_field_labels = [Lexicon.householdsize_label, Lexicon.zip_code_label , Lexicon.states_label ],
-            langcode="other")
-
-class transition (Page): 
-    form_model = 'player'
-    @staticmethod
-    def vars_for_template(player: Player):
-        try: 
-            player.participant.task_counter
-            print("none is true")
-        except:   
-            player.participant.task_counter = 0
-        player.participant.task_counter += 1 
-        player.block_order = player.participant.task_counter
-        return dict(Lexicon=player.session.scalesLexi)
+    form_fields= ['UnitUnderstanding']
     
+class Demographics(Page):
+     form_model = 'player'
+     form_fields= [ 'age', 'gender', 'education', 'income', 'polOrientation' ]
+       
+
+class End(Page):
+     form_model = 'player'
+       
 
 
 
-page_sequence = [ transition,Belief1,  Belief, Belief2, CCKnowledge, CCEmotion,
-                 BehaviorsFood, BehaviorsFood2, BehaviorsTransport, BehaviorsFlying, 
-                 PITrust, IBValues ,
-                 policyScales,
-                 DemographicsEnd
+page_sequence = [ # BehaviorsFlying,  BehaviorsFood2,BehaviorsTransport, BehaviorsFood, BehaviorLaundry,
+                   policyScales, ClimateConcern, Numeracy, NFC,  unit, End
+    # Belief,  Belief1, CCEmotion,
+     #            BehaviorsFood, BehaviorsFood2, BehaviorsTransport, BehaviorsFlying, 
+             #    PITrust, IBValues ,
+              #   policyScales,
+               #  DemographicsEnd
                  ]

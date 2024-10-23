@@ -4,13 +4,16 @@
 {% endblock %}
 
 {% block title %}
-    {{ Lexicon.policies_title }}
+Some questions on Policies 
+
 {% endblock %}
 
 {% block content %}
 
-<p> {{ Lexicon.intro_policies1}} <br>
-    {{ Lexicon.intro_policies2}}
+<p>
+    In the following, we will ask for your views on different public policies. Please answer them as truthfully as possible. <br>
+    Many countries have introduced new policies to reduce the risk of climate change. This includes policies that require or create incentives for reductions in greenhouse gas emissions across domains and actors. <br> <br>
+    Please indicate whether you strongly oppose or strongly support the following policies.
     <br>
     <br>
 </p>
@@ -19,10 +22,10 @@
 
 {{ for field in form }}
     {{formfield_errors field.name}}
-    <button class="accordion" id={{field.id}} name={{field.name}}>Section 1</button>
+    <button class="accordion" id={{field.id}} name={{field.name}}>  {{field.label}}  </button>
     <div class="accpanel">
         <table style="width:90%; margin-left: auto; margin-right: auto;">
-            <tr style="padding: 5px;"> <td colspan="3" style="text-align: left; padding:0"> {{Lexicon.strongly_opoose}} </td>  <td colspan="4"> </td>  <td colspan="3" style="text-align: right;"> {{Lexicon.strongly_support}} </td> </tr>
+            <tr style="padding: 5px;"> <td colspan="3" style="text-align: left; padding:0"> strongly oppose </td>  <td colspan="4"> </td>  <td colspan="3" style="text-align: right;"> strongly support </td> </tr>
 
             <tr >
                 {{ for choice in field }}            
@@ -34,12 +37,12 @@
 {{ endfor }}
 
 
-<div class="next-btn radiotable">
+
+<div class="next-btn radiotable">  
     <div style="float: right; padding-top: 2vh;">
-        <button id="nextst"  style=" margin-top: 4vh;" class="otree-btn-next btn btn-primary">{{Lexicon.next}}</button>
- 
+         {% next_button %} 
     </div>
-</div>
+</div> 
 {% endblock %}
 
 

@@ -1,0 +1,226 @@
+{% block styles %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .behavior-container {
+        margin-bottom: 20px;
+        font-weight: plain;
+    }
+    .behavior-label {
+        font-weight: plain;
+    }
+    select {
+        margin-left: 10px;
+    }
+    h1 {
+        color: #000000;
+        font-size: 40px;
+    }
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    .left-column {
+        flex: 2.5;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+    .right-column {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    h2 {
+        font-weight: plain;
+        color: #000000;
+        font-size: 32px;
+    }
+    .progress-bar-wrapper {
+        padding: 20px; /* Add padding around the bar */
+    }
+    .progress-bar-container {
+        width: 90px;
+        height: 300px; /* Represents 10 tons CO₂eq */
+        background-color: #b7b6b6;
+        border-radius: 5px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column-reverse; /* Fill from bottom up */
+        margin-top: 20px;
+    }
+    .progress-bar-section {
+        width: 100%;
+        transition: height 0.4s;
+    }
+    .section-1 { background-color: #CBE4F9; } /* Color for Diet */
+    .section-2 { background-color: #CDF5F6; } /* Color for Electricity */
+    .section-3 { background-color: #EFF9DA; } /* Color for Recycling */
+    .section-4 { background-color: #F9EBDF; }/* Color for Food */
+    .section-5 { background-color: #F9D8D6; } /* Color for Commute */
+    .section-6 { background-color: #D6CDEA; } /* Color for Vacation */
+
+    /* Add corresponding background colors for the select elements */
+    .select-diet { background-color: #CBE4F9; }
+    .select-electricity { background-color: #CDF5F6; }
+    .select-recycling { background-color: #EFF9DA; }
+    .select-food { background-color: #F9EBDF; }
+    .select-commute { background-color: #F9D8D6; }
+    .select-vacation { background-color: #D6CDEA; }
+</style>
+{% endblock %}
+
+{% block content %}
+<body>
+    <h1>Carbon Footprint Calculator</h1>
+    <br>
+    <p> 
+        By clicking on the boxes you can select different levels for each of the behaviors.<br>
+        The associated total carbon footprint of the selected behavior levels will be updated on the right side of your screen. 
+        The bar will fill with different colors based on the behaviors selected, each representing the amount of carbon emissions the behavior causes per year.<br>
+        <br><br>
+        <b> Please construct two carbon footprint as close to 3.0 as you can (there are at least 5 possibilites)</b>.<br> You may then proceed.
+    </p>
+    <br>
+
+
+    
+    <div class="container"> 
+        <div class="left-column"> 
+            <form id="carbon-footprint-form">
+                <!-- Explicitly set classes for each behavior -->
+                <div class="behavior-container">
+                    <label class="behavior-label">Diet (Based on an average adults' caloric needs for the duration of one year) </label>
+                    <select class="select-diet" name="diet" onchange="updateTotalFootprint()">
+                        <option value="2.206">Meat-based</option>
+                        <option value="1.338">Vegetarian</option>
+                    </select>
+                </div>
+
+                <div class="behavior-container">
+                    <label class="behavior-label">Drying clothes (Based on 3 drying loads per week and the average energy mix) </label>
+                    <select class="select-electricity" name="electricity" onchange="updateTotalFootprint()">
+                        <option value="0.00">air dry laundry </option>
+                        <option value="0.039">use dryer (average dryer and full load) </option> 
+                    </select>
+                </div>
+
+                <div class="behavior-container">
+                    <label class="behavior-label">Recycling (Materials such as paper, glass, metals for one year) </label>
+                    <select class="select-recycling" name="recycling" onchange="updateTotalFootprint()">
+                        <option value="0.0575">Does not recycle</option>
+                        <option value="0">Recycles</option>
+                    </select>
+                </div>
+
+                <div class="behavior-container">
+                    <label class="behavior-label">Food (Foods and bevarages bought and consumed for one year) </label>
+                    <select class="select-food" name="food" onchange="updateTotalFootprint()">
+                        <option value="0">More than 3/4 is regional</option>
+                        <option value="0.44">More than 3/4 is imported</option>
+                    </select>
+                </div>
+
+                <div class="behavior-container">
+                    <label class="behavior-label">Commute (12.5 miles to and from work everyday (one trip = 6.25 miles), 5 days a week for 48 weeks per year) </label>
+                    <select class="select-commute" name="commute" onchange="updateTotalFootprint()">
+                        <option value="0.471">By bus</option>
+                        <option value="1.595">By personal car</option>
+                    </select>
+                </div>
+
+                <div class="behavior-container">
+                    <label class="behavior-label">Vacation</label>
+                    <select class="select-vacation" name="vacation" onchange="updateTotalFootprint()">
+                        <option value="1.2">1 round-trip 3-6 hour flight (=2 flights)</option>
+                        <option value="0.0076">Via train (does not fly)</option>
+                    </select>
+                </div>
+            </form>
+            <br>
+        </div>
+
+        <div class="right-column"> 
+            <h2>Total Carbon Footprint in tons CO<sub>2eq</sub>:</h2> 
+            <div class="progress-bar-wrapper"></div>
+                <div class="progress-bar-container">
+                    <!-- Sections for each behavior -->
+                    <div class="progress-bar-section section-1" id="section-1"></div>
+                    <div class="progress-bar-section section-2" id="section-2"></div>
+                    <div class="progress-bar-section section-3" id="section-3"></div>
+                    <div class="progress-bar-section section-4" id="section-4"></div>
+                    <div class="progress-bar-section section-5" id="section-5"></div>
+                    <div class="progress-bar-section section-6" id="section-6"></div>
+                </div>
+                <br>
+            <span style="font-size: 32px;" id="total-footprint">click on the behaviors to find out</span>
+            <br>
+        </div>
+    </div>
+
+    <script>
+        const behaviorData = {{ behavior_data|safe }};
+        const totalFootprintElement = document.getElementById('total-footprint');
+        const sections = [
+            document.getElementById('section-1'),
+            document.getElementById('section-2'),
+            document.getElementById('section-3'),
+            document.getElementById('section-4'),
+            document.getElementById('section-5'),
+            document.getElementById('section-6')
+        ];
+        const minFootprint = 0;
+        const maxFootprint = 6;  // Container represents up to 10 tons CO2eq
+
+        function updateTotalFootprint() {
+            let totalFootprint = 0.0;
+            const selects = document.querySelectorAll('.behavior-container select');
+            let values = [];
+
+            selects.forEach(select => {
+                const value = parseFloat(select.value);
+                if (!isNaN(value)) {
+                    values.push(value);
+                    totalFootprint += value;
+                }
+            });
+
+            // Display the calculated total footprint
+            totalFootprint = totalFootprint.toFixed(2);
+            totalFootprintElement.innerText = totalFootprint;
+
+            // Calculate the proportionate height of each section
+            const totalHeight = (totalFootprint / maxFootprint) * 100;
+            values.forEach((value, index) => {
+                const sectionHeight = (value / totalFootprint) * totalHeight;
+                sections[index].style.height = `${sectionHeight}%`;
+            });
+
+            // Check if the total footprint is exactly 5.54, and enable the "Next" button if true
+            const nextButton = document.getElementById("nextst");
+            if (parseFloat(totalFootprint) >= 2.8 && parseFloat(totalFootprint) <= 3.2) {
+
+                nextButton.disabled = false;
+            } else {
+                nextButton.disabled = true;
+            }
+        }
+            // Initial calculation
+        updateTotalFootprint();
+  
+
+    </script>
+
+
+    <div >
+        <button id="nextst" style="float: right; margin-top: 2vh;" disabled class="otree-btn-next btn btn-primary"> Next </button>
+
+    </div>
+
+</body>
+{% endblock %}

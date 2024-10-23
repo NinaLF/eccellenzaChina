@@ -1,0 +1,21 @@
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+
+{% endblock %}
+
+{{ block title }}End{{ endblock }}
+{{ block content }}
+
+<p>
+    Thank you for your participation.<br>
+    <span style="color: crimson;"> Please remember to participate in the third and last part of the study one month from now. You will get an inivitation link from prolific to take part.</span> <br>
+    <b> PLEASE CLICK BELOW TO FINISH AND SUBMIT YOUR RESULTS </b>
+    <br>
+    <br>
+
+<button class="btn btn-primary btn-large reps" style="margin-top:3vh;" type="button" onclick="window.location.href='https://app.prolific.com/submissions/complete?cc=C1BL7N4O' "> Click here to Finish</button>
+
+</p>
+
+
+{{ endblock }}
