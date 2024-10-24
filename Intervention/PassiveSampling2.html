@@ -1,45 +1,13 @@
 {% block styles %}
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    .behavior-container {
-        margin-bottom: 20px;
-        
-    }
-    .behavior-label {
-        font-weight: bold;
-        
-    }
-    select {
-        margin-left: 10px;
-    }
-    h1, h2 {
-        color: #000000;
-        font-size: 40px;
-    }
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-        font-size: 24px;
-    }
-    .left-column {
-        flex: 2.5;
-        padding: 30px;
-        box-sizing: border-box;
-    }
-    .right-column {
-        flex: 1;
-        padding: 20px;
-        box-sizing: border-box;
-    }
-    h2{
-        font-weight: plain;
-        color: #000000;
-        font-size: 38px;
-    }
-</style>
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+
+    <style>
+        .text {
+            font-size: 19px
+        }
+    </style>
+    
 {% endblock %}
 
 {% block content %}
@@ -47,11 +15,11 @@
     <h1>Carbon Footprints </h1>
     <br>
     
-    <p> To give you some more information about carbon footprints, here you can see some different combinations of behaviors, and how this affects the overall size of the carbon footprint. <br> 
+    <p style="font-size: 19px;"> To give you some more information about carbon footprints, here you can see some different combinations of behaviors, and how this affects the overall size of the carbon footprint. <br> 
     </p>
 
 
-    <p> Below you will see two examples of different lifestyles with different associated carbon footprints based on the six introduced behaviors: 
+    <p style="font-size: 19px;"> Below you will see two examples of different lifestyles with different associated carbon footprints based on the six introduced behaviors: 
         <br>
         <br>
         <b>A low carbon lifestyle:</b> <br>
