@@ -160,7 +160,7 @@ class Player(BasePlayer):
     nfc5 = make_field('I really enjoy a task that involves coming up with new solutions to problems.')
     nfc6 = make_field('I would prefer a task that is intellectual, difficult, and important to one that is somewhat important but does not require much thought')
 
-    numeracy1 = models.IntegerField(min=0, max=100)
+    numeracy1 = models.IntegerField(min=0, max=100, label='Please provide a percentage between 0 and 100')
 
     generalFeedback = models.StringField(max_length=3000, blank=True, label='Do you have any comments, feedback or ideas? Thanks for sharing.')
    
