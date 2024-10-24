@@ -28,8 +28,21 @@
 </table>
 
 <br>
+<br>
+<br>
+<p>
+    Some people describe political affiliation on a left to right spectrum. 
+    Please indicate on the following scale ranging from 1 (extremely left) to 10 (extremely right) how you would classify yourself in terms of political ideology
 
-
+<div class="radiotable" style="padding-top:0vh; padding-left:0vw; ">
+<p> Overall, how would you describe your political attitudes and beliefs? </p>
+<p style="text-indent: 0vw;">
+    extremely left &nbsp;
+    {{ for choice in form.polOrientation}}
+        {{ choice }}
+    {{ endfor }}
+    &nbsp; extremely right
+</p>
 <br>
 
 

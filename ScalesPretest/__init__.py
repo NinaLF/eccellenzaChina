@@ -169,7 +169,7 @@ class Player(BasePlayer):
 
 class Belief(Page):
     form_model = 'player'
-    form_fields= [ 'belief1Happening' ]
+    form_fields= [ 'belief1Happening' , 'polOrientation']
 
 
 class ClimateConcern(Page):
