@@ -189,7 +189,7 @@ class QuestionsIntervention(Page):
      form_model = 'player'
      form_fields= [ 'intervention1', 'intervention2', 'intervention3', 'intervention4' , 'intervention5']
 
-class Questions(Page):
+class Feedback(Page):
      form_model = 'player'
      form_fields= ['subjectiveKnowledge', 'generalFeedback']
 
@@ -208,7 +208,7 @@ class End(Page):
 
 
 page_sequence = [ # BehaviorsFlying,  BehaviorsFood2,BehaviorsTransport, BehaviorsFood, BehaviorLaundry,
-                   QuestionsIntervention, NFC, Questions, ClimateConcern, Belief, Numeracy, End
+                   QuestionsIntervention, Feedback, NFC, ClimateConcern, Belief, Numeracy, End
     # Belief,  Belief1, CCEmotion,
      #            BehaviorsFood, BehaviorsFood2, BehaviorsTransport, BehaviorsFlying, 
              #    PITrust, IBValues ,
