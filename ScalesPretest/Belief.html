@@ -14,11 +14,11 @@
 <table class="radiotable2" style="width:100%; margin-left: auto; margin-right:auto; table-layout: fixed;" >
     <tbody>
         <tr></tr>
-        <tr> <th colspan="6" style="font-weight:normal;" id="id_belief1Happening" name="belief1Happening"> {{ Lexicon.belief1HappeningLabel }} </th> </tr>
+        <tr> <th colspan="6" style="font-weight:normal;" id="id_belief1Happening" name="belief1Happening"> {{  form.belief1Happening.label }} </th> </tr>
         <tr>
         
-            <td class="radio-column" colspan="3" style="text-align: left;"> {{ Lexicon.completely_disagree }}</td>
-            <td class="radio-column" colspan="3" style="text-align: right;"> {{ Lexicon.completely_agree }} </td>
+            <td class="radio-column" colspan="3" style="text-align: left;"> Completely disagree </td>
+            <td class="radio-column" colspan="3" style="text-align: right;"> Completely agree</td>
         </tr>
 
         <tr>
@@ -30,8 +30,7 @@
 </table>
 
 <br>
-<br>
-{{ formfield 'beliefConsensus' label=Lexicon.beliefConsensLabel}} 
+
 
 <br>
 
@@ -39,7 +38,7 @@
 
 <div class="next-btn radiotable">
     <div style="float: right; padding-top: 2vh;">
-        <button id="nextst"  style=" margin-top: 4vh;" class="otree-btn-next btn btn-primary">{{Lexicon.next}}</button>
+        <button id="nextst"  style=" margin-top: 4vh;" class="otree-btn-next btn btn-primary">Next</button>
  
     </div>
 </div>
