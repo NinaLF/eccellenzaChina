@@ -1,0 +1,35 @@
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+
+{% endblock %}
+
+{{ block title }}End{{ endblock }}
+{{ block content }}
+
+<p>
+    Thank you for your participation.<br>
+    <b> PLEASE CLICK BELOW TO FINISH AND SUBMIT YOUR RESULTS </b>
+    <br>
+    <br>
+
+    <button class="btn btn-primary btn-large reps" style="margin-top:3vh;" type="button"
+    onclick="window.location.href='https://dkr1.ssisurveys.com/projects/end?rst=1&psid={{ participant.label }}'"> Click here </button>
+
+</p>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Dynamically build URL with participant label
+    var participantLabel = "{{ participant.label }}";
+    var urlWithParticipant = "https://dkr1.ssisurveys.com/projects/end?rst=1&psid=" + encodeURIComponent(participantLabel);
+
+    // Create a meta refresh for automatic redirection
+    var metaTag = document.createElement('meta');
+    metaTag.setAttribute('http-equiv', 'refresh');
+    metaTag.setAttribute('content', '2; url=' + urlWithParticipant);
+
+    // Inject meta tag into head
+    document.head.appendChild(metaTag);
+</script>
+{% endblock %}

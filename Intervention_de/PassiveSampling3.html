@@ -1,0 +1,93 @@
+{% block styles %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .behavior-container {
+        margin-bottom: 20px;
+        
+    }
+    .behavior-label {
+        font-weight: bold;
+        
+    }
+    select {
+        margin-left: 10px;
+    }
+    h1, h2 {
+        color: #000000;
+        font-size: 40px;
+    }
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    .left-column {
+        flex: 2.5;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+    .right-column {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    h2{
+        font-weight: plain;
+        color: #000000;
+        font-size: 38px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<body>
+    <h1>Carbon Footprints </h1>
+    <br>
+    
+<body style="font-size: 19px; ">
+
+
+    <p style="font-size: 19px; "> Nachfolgend sehen Sie ein weiteres Beispiel für einen CO<sub>2</sub>-Fussabdruck auf der Grundlage der sechs vorgestellten Verhaltensweisen zum Vergleich: 
+        <br>
+        <br>
+        <br>
+
+        <b>Ein CO<sub>2</sub>-intensiver Lebensstil:</b><br> 
+        <img style="width:80%; height: 70%;  border: #000000 3px outset;" src="/static/global/images/ExampleHigh_de.png"><br> <br> 
+
+        <b> Zum Vergleich, ein moderater CO<sub>2</sub> Lebensstil könnte wie folgt aussehen:</b><br> 
+        <img style="width:75%; height: 75%;  border: #000000 3px outset; " src="/static/global/images/ExampleMid_de.png">
+    </p>
+
+    <p>
+        <br>
+        {{ formfield 'controlQuestion1' }} <br>
+        {{ formfield 'controlQuestion2' }} <br>
+        {{ formfield 'controlQuestion3' }} <br>
+    
+    </p>
+</body>
+
+<body>
+    <script>
+     
+
+        window.onload = function () {
+            setTimeout(function () {
+                document.getElementById("nextst").disabled = false;
+            }, 9000); // 9 seconds delay
+        };
+
+    
+    </script>
+
+    <div >
+        <button id="nextst" style="float: right; margin-top: 2vh;" disabled class="otree-btn-next btn btn-primary"> Weiter </button>
+
+    </div>
+
+</body>
+{% endblock %}

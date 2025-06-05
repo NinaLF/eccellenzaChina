@@ -1,0 +1,87 @@
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+{% endblock %}
+
+
+
+
+{{ block title }} Anweisungen zur Aufgabe {{ endblock }}
+{{ block content }}
+
+<style>
+    @media only screen and (min-width: 701px) {
+            .image {
+                width: 100%;
+            }
+        }
+    
+        @media only screen and (max-width: 700px) {
+            .radiotable {
+                width: 60%;
+            }
+        }
+    </style>
+
+<p> 
+    Die unterschiedlichen Lebensstile dieser Personen beziehen sich auf: <ul> 
+        <li> <b>Ernährungsverhalten (basierend auf 2000 kcal täglichem durchschnittlichem Bedarf):</b> Die betreffende Person folgt entweder einer <b>Fleisch-basierten Ernährung </b> oder einer <b>Pflanzen-basierten Ernährung (vegetarisch)</b>  </li>
+        <li> <b>Regionalität der Lebensmittel:</b> Die betreffende Person kauft und konsumiert entweder <b>hauptsächlich regionale Lebensmittel </b> oder <b>auch importierte</b> Lebensmittel </li>
+        <li> <b>Urlaubsreisen:</b> Die betreffende Person nimmt entweder <b>2 Mittelstreckenflüge pro Jahr (=3-6 Stunden)</b> oder <b>nimmt den Zug(z.B. London-Basel oder London-Amsterdam)</b> </li>
+        <li> <b>Recycling Verhalten:</b> Die betreffende Person <b>recycelt alles</b> oder <b>recycelt nicht</b> </li>
+        <li> <b>Arbeitsweg:</b> Die betreffende Person fährt jeden Tag die 20km zur und von der Arbeit, 5 Tage die Woche für 48 Wochen in Jahr <b>mit dem Fahrrad</b> oder <b>mit dem privaten Auto</b> </li>
+        <li> <b> Trocknen der Wäsche:</b> Die betreffende Person trocknet entweder drei Ladungen Wäsche pro Woche <b>an der Luft </b> oder <b>oder in einem Wäschetrockner</b> </li>
+       
+<br>
+<br> 
+
+</p>
+<p>
+    <b>Dabei beziehen sich die Emissionen der Verhalten bei jedem Verhalten auf die aufsummierten Emissionen auf ein ganzes Jahr gerechnet </b>, für die Ernährung bedeutet das, es sind die Emissionen, die eine Person aufgrund ihrer Ernährung und eines durchschnittlichen Kalorienbedarfs im Laufe eines ganzen Jahres ausstösst<br>
+</p>
+
+
+<p>
+    So sieht der CO<sub>2</sub>-Fussabdruck einer Person in unserer Aufgabe aus. <br>
+    
+    <div class="image" style="text-align: left;   "><img src='/static/global/images/example_de.png' style=" max-width:110%;    overflow-x: auto;" /></div>
+
+
+<br>
+</p>
+
+<p>
+<i>Das heisst, im obigen Beispiel pendelt die Person jeden Wochentag mit dem Auto zur Arbeit, trocknet die Wäsche mit dem Trockner, kauft und isst regionale und importierte Lebensmittel, folgt einer fleisch-basierten Ernährung, fährt mit dem Zug in den Urlaub und recycelt.</i> <br> 
+
+</p>
+<br>
+
+<p>
+    Als Nächstes werden Sie den CO<sub>2</sub>-Fussabdruck von <b>16</b> Personen mit unterschiedlichen Lebensstilen einschätzen. <br> 
+
+    Bitte sehen Sie sich jeden einzelnen CO<sub>2</sub>-Fussabdruck genau an und nehmen Sie sich etwas Zeit, um Ihre Einschätzung abzugeben.  <br> 
+    Die Reihenfolge, in der die 6 Verhaltensweisen dargestellt werden, wird sich bei den 16 Beispielen, die Sie sehen werden, ändern.
+</p>
+
+<div >
+    <button id="nextst" style="float: right; margin-top: 2vh;" disabled class="otree-btn-next btn btn-primary">Weiter</button>
+
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+
+    enablebtn = function () {
+        document.getElementById("nextst").disabled = false;
+    }
+
+
+
+    window.onload = function () {
+        setTimeout(function () { enablebtn() }, 10 * 1000);
+    }
+</script>
+{% endblock %}

@@ -1,30 +1,73 @@
 {% block styles %}
-    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
-    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
-
-    <style>
-        .text {
-            font-size: 19px
-        }
-    </style>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 1.1rem;
+    }
+    .behavior-container {
+        margin-bottom: 20px;
+        
+    }
+    .behavior-label {
+        font-weight: bold;
+        
+    }
+    select {
+        margin-left: 10px;
+    }
+    h1, h2 {
+        color: #000000;
+        font-size: 40px;
+    }
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    .left-column {
+        flex: 2.5;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+    .right-column {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    h2{
+        font-weight: plain;
+        color: #000000;
+        font-size: 38px;
     
+    }
+
+   
+</style>
 {% endblock %}
 
 {% block content %}
-<body>
+
     <h1>Carbon Footprints</h1>
     <br>
-
-    <p style="font-size: 19px;"> 
+<body style="font-size: 19px; ">
+    <p style="font-size: 19px; "> 
         A personal carbon footprint refers to the total amount of greenhouse gases (including CO<sub>2</sub>  and methane) that are emitted into the atmosphere as a result of an individual,s behavior. <br> 
         The carbon footprint thus includes emissions from driving, flying, using electricity, cooling or heating your home, purchasing goods and other sources. <br> 
        
         In other words, <b>a personal carbon footprint reflects an individual's total impact on the climate system</b>. 
-        <br>
+        <br> <br>
     <p>
 
-    <p style="font-size: 19px;"> To give you some more information about carbon footprints, here you can see some different combinations of behaviors, and how this affects the overall size of the carbon footprint. <br> 
-        The different lifestyles you will see concern 6 example behaviors: <ul> 
+    <p style="font-size: 19px; ">
+        On the next page you will see some examples of different carbon footprint in tons of CO<sub>2</sub>. <br>
+            
+        You will then answer 3 questions and then continue with the main task of the study. There you will be able to use the knowledge you have gained from the examples and information <br><br>
+    </p>
+
+    <p style="font-size: 19px; "> 
+        To give you some more information about carbon footprints, you wil see some examples of carbon footprints made up of a subset of behaviors.<br> 
+        The different lifestyles you will see concern 6 example behaviors: <ul style="font-size: 19px; "> 
             <li> <b>Dietary behavior: </b> <br> The respective person either follows a <b>meat-based diet (omnivorous)</b> or a <b>plant-based diet (vegetarian)</b> </li> 
             <li> <b>Recycling behavior:</b> <br> The respective person either <b>recycles comprehensively</b> or <b>does not recycle</b> </li>  
             <li> <b>Regionality of food purchases:</b> <br> The respective person either buys and consumes <b>mainly regional food </b> or <b>also imported</b> food items </li>
@@ -32,20 +75,24 @@
             <li> <b>Commuting to work:</b> <br> The respective person either commutes a total of 20km to and from work everyday, 5 days a week for 48 weeks per year <b>by personal car</b>  or <b>by bus</b> </li> 
             <li> <b>Traveling on vacation:</b> <br> The respective person either <b>takes two medium distance flights a year (=3-6hours)</b> or <b>or takes the train (e.g. London-Paris or London-Switzerland)</b> </li>
         
-        
+        </ul>
+    </p>
         <br>
-        <b> Please imagine the highest possible carbon footprint given these 6 behaviors</b> <br> <br>
-        On the next page you will see some examples with the associated carbon footprint in tons of CO<sub>2</sub>.
+    <p style="font-size: 19px; ">
+        <b style="font-size: 19px; "> Please imagine the highest possible carbon footprint given these 6 behaviors</b> <br>
+        
     </p>
 
 
+</body>
+<body > 
     <script>
      
 
         window.onload = function () {
             setTimeout(function () {
                 document.getElementById("nextst").disabled = false;
-            }, 9000); // 9 seconds delay
+            }, 5000); // 9 seconds delay
         };
 
     

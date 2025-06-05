@@ -3,19 +3,72 @@ from os import environ
 SESSION_CONFIGS = [
      dict(
          name='intervention',
+         app_sequence=['Intervention_de'],
+         num_demo_participants=10,
+     ),
+     dict(
+         name='intervention_en',
          app_sequence=['Intervention'],
+         num_demo_participants=10,
+     ),
+     dict(
+         name='testQuota',
+         app_sequence=['Intro_t1', 'Scales_t1' ],
          num_demo_participants=10,
      ),
 
       dict(
          name='scales',
-         app_sequence=['ScalesPretest'],
+         app_sequence=['Scales_t1_de', 'Scales_t2_de'],
+         num_demo_participants=10,
+     ),
+     dict(
+         name='carbontask',
+         app_sequence=['Nina_carbontask'],
+         num_demo_participants=10,
+     ),
+     
+     dict(
+         name='carbontask_de',
+         app_sequence=['Nina_carbontask_de'],
          num_demo_participants=10,
      ),
 
       dict(
-         name='study',
-         app_sequence=[ 'Intro', 'Intervention', 'ScalesPretest'],
+         name='study_t1',
+         app_sequence=[ 'Intro_t1', 'Nina_instructions', 'Nina_carbontask', 'Scales_t1'],
+         num_demo_participants=10,
+     ),
+      dict(
+         name='study_t1_de',
+         app_sequence=[ 'Intro_t1_de', 'Nina_instructions_de', 'Nina_carbontask_de', 'Scales_t1_de'],
+         num_demo_participants=10,
+     ),
+
+     dict(
+         name='study_t2',
+         app_sequence=[ 'Intro_t2', 'Intervention', 'Nina_instructions', 'Nina_carbontask', 
+                        'Scales_t2'],
+         num_demo_participants=10,
+     ),
+
+     dict(
+         name='study_t2_de',
+         app_sequence=[ 'Intro_t2_de','Intervention_de', 'Nina_instructions_de', 'Nina_carbontask_de', 
+                        'Scales_t2_de'],
+         num_demo_participants=10,
+     ),
+
+      dict(
+         name='study_t3_de',
+         app_sequence=[ 'Intro_t3_de', 'Nina_instructions_de', 'Nina_carbontask_de', 
+                        'Scales_t3_de'],
+         num_demo_participants=10,
+     ),
+     dict(
+         name='study_t3',
+         app_sequence=[ 'Intro_t3',  'Nina_instructions', 'Nina_carbontask', 
+                        'Scales_t3'],
          num_demo_participants=10,
      ),
 
@@ -32,8 +85,11 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = [ 'group_assignment', 'diet', 'electricity', 'recycling', 'food', 'commute', 'vacation',
-                      'task_rounds']
-SESSION_FIELDS = []
+                      'task_rounds', 'quota_full']
+SESSION_FIELDS = [ 'num_female_de', 'num_male_de', 
+                  'num_age1_de', 'num_age2_de', 'num_age3_de', 'num_age4_de',
+                  'num_female_uk', 'num_male_uk',
+                  'num_age1_uk', 'num_age2_uk', 'num_age3_uk', 'num_age4_uk']
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans

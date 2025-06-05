@@ -1,37 +1,71 @@
 {% block styles %}
-    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
-    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
-
-    <style>
-        .text {
-            font-size: 19px
-        }
-    </style>
-    
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .behavior-container {
+        margin-bottom: 20px;
+        
+    }
+    .behavior-label {
+        font-weight: bold;
+        
+    }
+    select {
+        margin-left: 10px;
+    }
+    h1, h2 {
+        color: #000000;
+        font-size: 40px;
+    }
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    .left-column {
+        flex: 2.5;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+    .right-column {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    h2{
+        font-weight: plain;
+        color: #000000;
+        font-size: 38px;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<body>
+
     <h1>Carbon Footprints </h1>
     <br>
     
-    <p style="font-size: 19px;"> To give you some more information about carbon footprints, here you can see some different combinations of behaviors, and how this affects the overall size of the carbon footprint. <br> 
+<body style="font-size: 19px; "> 
+    <p style="font-size: 19px; "> To give you some more information about carbon footprints, here you can see some different combinations of behaviors, and how this affects the overall size of the carbon footprint. <br> 
     </p>
 
 
-    <p style="font-size: 19px;"> Below you will see two examples of different lifestyles with different associated carbon footprints based on the six introduced behaviors: 
+    <p style="font-size: 19px; "> Below you will see two examples of different lifestyles with different associated carbon footprints based on the six introduced behaviors: 
         <br>
         <br>
         <b>A low carbon lifestyle:</b> <br>
-        <img style="width:85%; height: 65%; border: #000000 3px outset; " src="/static/global/images/exampleLow.png">
+        <img style="width:75%; height: 75%; border: #000000 3px outset; " src="/static/global/images/ExampleLow.png">
         <br>
         <br>
-        <b>A medium carbon lifestyle  could look like this:</b>
-        <img style="width:85%; height: 85%;  border: #000000 3px outset; " src="/static/global/images/exampleMedium.png">
+        <b>A medium carbon lifestyle  could look like this:</b> <br>
+        <img style="width:75%; height: 75%;  border: #000000 3px outset; " src="/static/global/images/ExampleMid.png">
         <br>
     </p>
 
-
+</body>
+<body>   
     <script>
      
 

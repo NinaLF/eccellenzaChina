@@ -1,0 +1,53 @@
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+{% endblock %}
+
+{{ block title }} Instructions on your task  {{ endblock }}
+{{ block content }}
+
+<body>
+
+<p> 
+    In the following we will ask you to <b>judge the climate friendliness of different carbon footprints</b>.  <br> 
+    This is not necessarily something people commonly do in their day to day lives, so we just ask you to make your best estimate without looking up any information. We are interested in your perceptions. <br> 
+
+</p>
+
+<p> 
+    A personal carbon footprint refers to the total amount of greenhouse gases (including CO<sub>2</sub>  and methane) that are emitted into the atmosphere as a result of an individual's behavior. <br> 
+    The carbon footprint thus includes emissions from driving, flying, using electricity, cooling or heating your home, purchasing goods and other sources. <br> 
+   
+    In other words, <b>a personal carbon footprint reflects an individual's total impact on the climate system</b>. 
+    <br>
+<p>
+    Next you will receive some more information and see how the task will look like.<br> 
+
+</p>
+
+
+<div >
+    <button id="nextst" style="float: right; margin-top: 2vh;" disabled class="otree-btn-next btn btn-primary">Next</button>
+
+</div>
+
+</body>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+
+    enablebtn = function () {
+        document.getElementById("nextst").disabled = false;
+    }
+
+
+
+    window.onload = function () {
+        setTimeout(function () { enablebtn() }, 7 * 1000);
+    }
+</script>
+{% endblock %}
