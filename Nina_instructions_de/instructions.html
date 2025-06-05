@@ -1,0 +1,50 @@
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+{% endblock %}
+
+{{ block title }} Anweisungen zur Aufgabe {{ endblock }}
+{{ block content }}
+
+<body>
+
+<p> 
+    Im Folgenden werden wir Sie bitten, <b>die Klimafreundlichkeit verschiedener CO<sub>2</sub> -Fussabdrücke zu beurteilen</b>. <br> 
+    Dies ist nicht unbedingt etwas, was die meisten Menschen in ihrem Alltag machen, daher bitten wir Sie, Ihre beste Schätzung abzugeben, ohne irgendwelche Informationen nachzuschlagen. Wir sind an Ihren Wahrnehmungen interessiert.<br> 
+</p>
+
+<p> 
+    Ein persönlicher CO<sub>2</sub>-Fussabdruck bezieht sich auf die Gesamtmenge an Treibhausgasen (einschliesslich CO<sub>2</sub>  und Methan), die aufgrund des Verhaltens einer Person in die Atmosphäre ausgestossen wird. <br> 
+    Der CO<sub>2</sub> -Fussabdruck umfasst somit Emissionen aus dem Fahrverhalten, Fliegen, dem Verbrauch von Strom, der Kühlung oder Heizung Ihres Zuhauses, dem Kauf von Waren und anderen Quellen. <br>
+    <br> Mit anderen Worten, ein <b>persönlicher CO<sub>2</sub>-Fussabdruck spiegelt die gesamte Auswirkung einer Person auf das Klimasystem wider</b>.
+<p>
+    Als Nächstes erhalten Sie einige weitere Informationen und sehen, wie die Aufgabe aussehen wird.<br> 
+
+</p>
+
+
+<div >
+    <button id="nextst" style="float: right; margin-top: 2vh;" disabled class="otree-btn-next btn btn-primary">Weiter</button>
+
+</div>
+
+</body>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+
+    enablebtn = function () {
+        document.getElementById("nextst").disabled = false;
+    }
+
+
+
+    window.onload = function () {
+        setTimeout(function () { enablebtn() }, 9 * 1000);
+    }
+</script>
+{% endblock %}

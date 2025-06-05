@@ -1,0 +1,134 @@
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+
+    <style>
+        .text {
+            font-size: 19px
+        }
+    </style>
+    
+{% endblock %}
+
+
+{{ block title }}
+   
+{{ endblock }}
+{{ block content }}
+
+
+<div > 
+    <p>
+        Bitte geben Sie an, wie sehr Sie den folgenden Aussagen zustimmen oder nicht zustimmen:
+
+    </p>
+
+
+    {{ for field in form }}
+        {{formfield_errors field.name}}
+        <button class="accordion" id={{field.id}} name={{field.name}}>  {{field.label}}  </button>
+        <div class="accpanel">
+            <table style="width:90%; margin-left: auto; margin-right: auto;">
+                <tr style="padding: 5px;"> <td colspan="3" style="text-align: left; padding:0"> Stimme absolut nicht zu </td>  <td colspan="4"> </td>  <td colspan="3" style="text-align: right;"> Stimme absolut zu </td> </tr>
+
+                <tr >
+                    {{ for choice in field }}            
+                            <td class="column accchoice" style="width: inherit; text-align: center; padding: 0px 5px 30px" data-parent={{field.id}} onclick="mark_answered( `{{field.name}}` )">{{ choice }}</td>
+                    {{ endfor }}
+                </tr>     
+            </table>
+        </div>
+    {{ endfor }}
+
+
+</div>
+
+<div class="next-btn radiotable">  
+    <div style="float: right; background-color:  #26a69a;  border-color: #26a69a; border-radius: 0%;  background-color: #26a69a; text-transform: uppercase; color: white; box-shadow:  slategray ;">
+        <button class="otree-btn-next btn btn-primary" onclick="document.forms[0].submit();">Weiter</button>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var maxid= 6
+    var idarray = ['id_nfc_1', 'id_nfc_2', 'id_nfc_3', 'id_nfc_4', 'id_nfc_5', 'id_nfc_6' ]
+
+    function mark_answered(nameQuestion){
+        if(! document.forms.form[nameQuestion].value==''){
+            myid = "id_"+nameQuestion
+            myelement = document.getElementById(myid)
+            myelement.classList.add("answered")
+
+
+            const findMyId = (myelement) => myelement == myid;
+            const myIndex = idarray.findIndex(findMyId)
+            if (myIndex + 1 < idarray.length) {
+                setTimeout(function () {close_individual_question(myid) }, 300);
+                mynextid = idarray[myIndex+1]
+                setTimeout(function () {open_individual_question(mynextid, false) }, 600);
+            }
+        }
+        
+    }
+
+
+    function close_individual_question(myid){
+        myacc = document.getElementById(myid);
+            myacc.classList.remove("accactive");
+            accpanel = myacc.nextElementSibling;
+            accpanel.style.maxHeight = null;      
+    }
+
+    function open_individual_question(myid, scroll){
+        myacc = document.getElementById(myid);
+        if(scroll==true){
+            if(screen.height < 1000){
+                setTimeout(function(){myacc.scrollIntoView({behavior: "smooth"})},600);
+            }
+        }
+        myacc.classList.add("accactive");
+        accpanel = myacc.nextElementSibling;
+        accpanel.style.maxHeight = 600 + "px";
+       
+       
+
+    }
+
+   function render_questions(){
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                event.preventDefault()
+                this.classList.toggle("accactive");
+                var accpanel = this.nextElementSibling;
+                if (accpanel.style.maxHeight) {
+                    accpanel.style.maxHeight = null;
+                } else {
+                    accpanel.style.maxHeight = 600 + "px";
+                }
+            });
+        }
+
+    }
+
+        
+
+        $(document).ready(function () {
+
+            render_questions()
+            open_individual_question("id_nfc_1", false)
+        for (let i = 0; i < js_vars.form_fields.length; i++) {   
+            prop= js_vars.form_fields[i] + 'Label'
+            label = js_vars.form_field_labels[i]
+            id = 'id_' + js_vars.form_fields[i]
+            $('#' + id).html(label)
+        }
+
+
+    })
+    
+</script>
+{{ endblock }}

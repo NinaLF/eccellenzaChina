@@ -1,0 +1,110 @@
+
+{% block styles %}
+    <link href="{{ static 'global/css/generalStyle.css'}}" rel="stylesheet">
+    <link href="{{ static 'global/css/customStyle.css'}}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+   
+
+{% endblock %}
+
+{% block content %}
+<p style="font-size: 18px; font-weight: bold;"> How much do you trust these actors in climate change ? </p>
+<br>
+<p style="font-weight: bold; line-height: normal;"> Local government:</p>
+<table  style="table-layout: fixed; width: 100%; line-height: normal;">
+    <tbody>
+        <tr > <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td></tr>
+    <tr> 
+        <th class="radio-column"  colspan="2" style="text-align: left; font-weight:normal;"> Not at all</th> 
+            <th class="radio-column"> </th> 
+            <th style="font-weight:normal; text-align: center;"  colspan="4" id={{form.pit1.id}} name={{form.pit1.name}}>  </th>
+            <th class="radio-column"> </th> 
+            <th  colspan="2" style="text-align: right; font-weight:normal;"  class="radio-column"> Very much </th> 
+    </tr>
+
+
+    <tr style="background-color: rgb(238, 238, 238)" >
+       
+        {{ for choice in form.pit1 }}
+        <td>{{ choice }}</td>
+        {{ endfor }}
+    </tr>
+    </tbody>
+</table>
+<br>
+<p style="font-weight: bold; line-height: normal;"> National government</p>
+
+<table  style="table-layout: fixed; width: 100%; line-height: normal;">
+    <tbody>
+        <tr > <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td></tr>
+    <tr> 
+        <th class="radio-column"  colspan="2" style="text-align: left; font-weight:normal;"> Not at all</th> 
+            <th class="radio-column"> </th> 
+            <th style="font-weight:normal; text-align: center;"  colspan="4" id={{form.pit2.id}} name={{form.pit2.name}}>  </th>
+            <th class="radio-column"> </th> 
+            <th  colspan="2" style="text-align: right; font-weight:normal;"  class="radio-column"> Very much </th> 
+    </tr>
+
+
+    <tr style="background-color: rgb(238, 238, 238)" >
+       
+        {{ for choice in form.pit2 }}
+        <td>{{ choice }}</td>
+        {{ endfor }}
+    </tr>
+    </tbody>
+</table>
+
+<br><br> <br>
+<p style="font-size: 18px; font-weight: bold;"> To what extent do you feel a personal responsibility to try to reduce climate change?</p>
+
+<table style="table-layout: fixed; width: 100%;">
+    <tbody>
+        <tr> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td></tr>
+    <tr> 
+        <th class="radio-column"  colspan="2" style="text-align: left; font-weight:normal;"> Not at all</th> 
+            <th class="radio-column"> </th> 
+            <th style="font-weight:normal; text-align: center;"  colspan="4" id={{form.responsibility.id}} name={{form.responsibility.name}}>  </th>
+            <th class="radio-column"> </th> 
+            <th  colspan="2" style="text-align: right; font-weight:normal;"  class="radio-column"> Very much </th> 
+    </tr>
+    <tr style="background-color: rgb(238, 238, 238)">
+       
+        {{ for choice in form.responsibility }}
+        <td>{{ choice }}</td>
+        {{ endfor }}
+    </tr>
+</tbody>
+</table>
+
+<div class="next-btn radiotable">  
+    <div style="float: right; background-color:  #26a69a;  border-color: #26a69a; border-radius: 0%;  background-color: #26a69a; text-transform: uppercase; color: white; box-shadow:  slategray ;">
+        <button class="otree-btn-next btn btn-primary" onclick="document.forms[0].submit();">Weiter</button>
+    </div>
+</div>
+{% endblock %}
+
+{{formfield_errors form.pit2.name}}
+{{formfield_errors form.pit2.name}}
+
+
+{% block scripts %}
+<script src="{% static 'global/js/functions.js' %}" defer></script>
+<script>
+
+
+    $(document).ready(function () {
+        for (let i = 0; i < js_vars.form_fields.length; i++) {   
+            prop= js_vars.form_fields[i] + 'Label'
+            label = js_vars.form_field_labels[i]
+            id = 'id_' + js_vars.form_fields[i]
+            $('#' + id).html(label)
+        }
+
+
+    })
+
+</script>
+{% endblock %}

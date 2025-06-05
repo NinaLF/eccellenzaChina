@@ -1,0 +1,113 @@
+{% block styles %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .behavior-container {
+        margin-bottom: 20px;
+        
+    }
+    .behavior-label {
+        font-weight: bold;
+        
+    }
+    select {
+        margin-left: 10px;
+    }
+    h1, h2 {
+        color: #000000;
+        font-size: 40px;
+    }
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    .left-column {
+        flex: 2.5;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+    .right-column {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    h2{
+        font-weight: plain;
+        color: #000000;
+        font-size: 38px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+    <h1>Carbon Footprint Calculator</h1>
+    <br>
+<body style="font-size: 19px;">
+    <p style="font-size: 19px;"> Here, you can try out different combinations of behaviors, and see how this affects the overall size of the carbon footprint. <br> 
+        <br>
+        By clicking on the <span style="background-color: #c9e7e4;">boxes</span> you can select different levels for each of the behaviors.<br>
+        The associated <span style="background-color: #e8d13b;">total carbon footprint</span> of the selected behavior levels will be updated on the right side of your screen. <br>
+        Once you feel you have explored enough, you may proceed to the next page.
+    </p>
+    <br>
+
+
+    <div class="container" > 
+        <div class="left-column" > 
+        
+            <form id="carbon-footprint-form">
+                {% for behavior, levels in behavior_data.items() %}
+                <div class="behavior-container">
+                    <label class="behavior-label">{{ behavior }}</label>
+                    <select style="background-color:  #c9e7e4;" name="{{ behavior.lower() }}" onchange="updateTotalFootprint()">
+                        {% for level, value in levels.items() %}
+                        <option  value="{{ value }}">{{ level }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endfor %}
+            </form>
+        <br>
+    </div>
+        <div class="right-column" > 
+            <h2>Total Carbon Footprint in tons CO<sub>2</sub>e: </h2> 
+                <span style="font-size: 38px; background-color: #e8d13b;"  id="total-footprint" > click on the behaviors to find out </span>  
+            <br>
+        </div>
+    </div>
+
+    <script>
+        const behaviorData = {{ behavior_data|safe }};
+        const totalFootprintElement = document.getElementById('total-footprint');
+        const form = document.getElementById('carbon-footprint-form');
+
+        function updateTotalFootprint() {
+            let totalFootprint = 0.0;
+            const selects = document.querySelectorAll('select');
+            selects.forEach(select => {
+                totalFootprint += parseFloat(select.value);
+            });
+            totalFootprintElement.innerText = totalFootprint.toFixed(2);
+        }
+
+        window.onload = function () {
+            setTimeout(function () {
+                document.getElementById("nextst").disabled = false;
+            }, 15000); // 15 seconds delay
+        };
+
+        // Initial calculation
+        updateTotalFootprint();
+    </script>
+
+    <div >
+        <button id="nextst" style="float: right; margin-top: 2vh;" disabled class="otree-btn-next btn btn-primary"> Next </button>
+
+    </div>
+
+</body>
+{% endblock %}
